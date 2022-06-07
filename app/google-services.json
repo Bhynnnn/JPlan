@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "888679978749",
+    "project_id": "jplan-a06ab",
+    "storage_bucket": "jplan-a06ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888679978749:android:57844d6b66ba3d49939094",
+        "android_client_info": {
+          "package_name": "com.example.jplan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888679978749-5t36aqvl13fjqa12akktvt3dho0h6aap.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDARYhMYy4DrPKiLzbHRxl3JHx4YUiOh2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888679978749-5t36aqvl13fjqa12akktvt3dho0h6aap.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "888679978749-vl6pc7r2bhm272hocs26o9pc1sc8un2k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "JPlan"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
