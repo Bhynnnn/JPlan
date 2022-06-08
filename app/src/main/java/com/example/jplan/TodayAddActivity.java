@@ -43,7 +43,6 @@ public class TodayAddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_add);
-        setTitle("오늘의 일정 추가하기");
         memo_today_edt = findViewById(R.id.memo_today_edt);
         title_today_edt = findViewById(R.id.title_today_edt);
         time_finish = findViewById(R.id.time_finish);

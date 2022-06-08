@@ -44,8 +44,15 @@ public class TodayAdapter extends RecyclerView.Adapter<TodayAdapter.ViewHolder> 
         else{
             holder.memo_item.setVisibility(View.VISIBLE);
         }
+
+        if(today.getStart_Today().equals("")){
+            // 값이 없을 때
+            holder.start_item.setText(today.getStart_Today());
+        }
+        else{
+            holder.start_item.setText(today.getStart_Today() + "~");
+        }
         holder.title_item.setText(today.getTitle_Today());
-        holder.start_item.setText(today.getStart_Today());
         holder.finish_item.setText(today.getFinish_Today());
         holder.memo_item.setText(today.getMemo_Today());
         if(position<10){

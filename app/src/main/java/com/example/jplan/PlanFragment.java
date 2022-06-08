@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -15,7 +18,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.Text;
 
@@ -25,9 +33,14 @@ public class PlanFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private PlanAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<Plan> mMyData;
+    private ArrayList<Plan> mPlanData;
     FloatingActionButton fabAdd;
 
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+
+    String str_title, str_memo, str_icon;
+    int total_Plan_int, count_Plan_int;
 
     public PlanFragment() {
         // Required empty public constructor
@@ -42,6 +55,9 @@ public class PlanFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("fragment test oncreate");
+
+        initDataset();
     }
 
     // todo PlanAddActivity로 추가된 Plan item 2줄로 출력 해야 함 -> recyclerview
@@ -51,17 +67,21 @@ public class PlanFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
         getActivity().setTitle("Plan");
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        mRecyclerView.setHasFixedSize(true);
 //        mLayoutManager = new LinearLayoutManager(getActivity());
-        mLayoutManager = new StaggeredGridLayoutManager(2, LinearLayout.VERTICAL);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.scrollToPosition(0);
-        mAdapter = new PlanAdapter(mMyData);
+//        for(int i=0; i<mPlanData.size(); i++){
+//            System.out.println("fragment test "+ mPlanData.get(i).toString());
+//        }
+        System.out.println("fragment test oncreateview");
+        mAdapter = new PlanAdapter(mPlanData);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         fabAdd = view.findViewById(R.id.fabAdd);
@@ -69,17 +89,43 @@ public class PlanFragment extends Fragment {
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), TodayAddActivity.class);
+                Intent intent = new Intent(getContext(), PlanAddActivity.class);
                 startActivity(intent);
             }
         });
-
+//Fragment refresh
         return view;
+    }
+
+    private void initDataset() {
+        mPlanData = new ArrayList<>();
+
+        db.collection("User").document(auth.getCurrentUser().getUid()).collection("Plan").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot item : queryDocumentSnapshots) {
+                    str_title = item.get(Constants.TITLE_PLAN).toString();
+                    str_memo = item.get(Constants.MEMO_PLAN).toString();
+                    str_icon = item.get(Constants.ICON_PLAN).toString();
+                    total_Plan_int = Integer.parseInt(item.get("total_Plan").toString());
+                    count_Plan_int = Integer.parseInt(item.get("count_Plan").toString());
+
+                    mPlanData.add(new Plan(str_title, str_memo, str_icon, total_Plan_int, count_Plan_int));
+                }
+                mAdapter.notifyDataSetChanged();
+
+            }
+        });
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity)getActivity()).tb_title.setText("Plan");
+
+        ((MainActivity) getActivity()).tb_title.setText("Plan");
+        System.out.println("fragment test onresume");
+
+
     }
 }

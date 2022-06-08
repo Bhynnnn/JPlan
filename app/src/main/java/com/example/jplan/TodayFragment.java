@@ -36,8 +36,7 @@ public class TodayFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private TodayAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<Today> mMyData;
-    private Integer[] mData;
+    private ArrayList<Today> mTodayData;
     FloatingActionButton fabAdd;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -51,14 +50,13 @@ public class TodayFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_today, container, false);
-        getActivity().setTitle("Today");
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.scrollToPosition(0);
-        mAdapter = new TodayAdapter(mMyData);
+        mAdapter = new TodayAdapter(mTodayData);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         fabAdd = view.findViewById(R.id.fabAdd);
@@ -85,10 +83,10 @@ public class TodayFragment extends Fragment {
         // 먼저 24칸 만들고
         // db조회했을 때 start_time 앞자리의 값들은 array에 그대로 담고
         // 없는 값들은 빈칸으로 넣어
-        mMyData = new ArrayList<>();
+        mTodayData = new ArrayList<>();
 
         for(int i=0; i<24; i++){
-            mMyData.add(i, new Today(i, "", "", "", ""));
+            mTodayData.add(i, new Today(i, "", "", "", ""));
         }
         db.collection("User").document(auth.getCurrentUser()
                 .getUid()).collection("Today").document(timestamp_date).collection("PlanByTime")
@@ -112,9 +110,9 @@ public class TodayFragment extends Fragment {
                     System.out.println("substring result" + result);
                     int timeIdx = Integer.parseInt(result);
 
-                    mMyData.get(timeIdx).setAll(timeIdx, str_title, str_start, str_finish, str_memo);
+                    mTodayData.get(timeIdx).setAll(timeIdx, str_title, str_start, str_finish, str_memo);
                 }
-                System.out.println("test fragment " + mMyData.toString());
+                System.out.println("test fragment " + mTodayData.toString());
 
                 mAdapter.notifyDataSetChanged();
             }

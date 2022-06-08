@@ -72,6 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
+                    android:paddingLeft="20dp"
                     android:background="@drawable/light_component" />
             </LinearLayout>
             <LinearLayout
@@ -143,6 +144,7 @@
                     android:id="@+id/memo_today_edt"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:paddingLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/light_component" />
             </LinearLayout>
@@ -160,7 +162,7 @@
                     android:layout_width="350dp"
                     android:layout_height="50dp"
                     android:layout_marginBottom="50dp"
-                    android:background="@drawable/light_component"
+                    android:background="@drawable/dark_component"
                     android:text="일정 추가하기"
                     android:textSize="20dp"
                     android:textStyle="bold" />
