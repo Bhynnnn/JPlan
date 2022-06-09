@@ -40,7 +40,8 @@ public class PlanFragment extends Fragment {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     String str_title, str_memo, str_icon;
-    int total_Plan_int, count_Plan_int;
+    int  total_Plan_int, count_Plan_int;
+    boolean check_Plan_bool;
 
     public PlanFragment() {
         // Required empty public constructor
@@ -94,6 +95,7 @@ public class PlanFragment extends Fragment {
             }
         });
 //Fragment refresh
+        refreshRecyclerView(mRecyclerView);
         return view;
     }
 
@@ -109,14 +111,20 @@ public class PlanFragment extends Fragment {
                     str_icon = item.get(Constants.ICON_PLAN).toString();
                     total_Plan_int = Integer.parseInt(item.get("total_Plan").toString());
                     count_Plan_int = Integer.parseInt(item.get("count_Plan").toString());
-
-                    mPlanData.add(new Plan(str_title, str_memo, str_icon, total_Plan_int, count_Plan_int));
+                    check_Plan_bool = Boolean.parseBoolean(item.get("check_Plan").toString());
+                    mPlanData.add(new Plan(str_title, str_memo, str_icon, total_Plan_int, count_Plan_int, check_Plan_bool));
                 }
                 mAdapter.notifyDataSetChanged();
 
             }
         });
 
+    }
+
+    void refreshRecyclerView(RecyclerView recyclerView){
+        RecyclerView.Adapter adapterRef=recyclerView.getAdapter();
+        recyclerView.setAdapter(null);
+        recyclerView.setAdapter(adapterRef);
     }
 
     @Override

@@ -39,13 +39,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class PlanAddActivity extends AppCompatActivity {
     View item_img_plan;
     EditText title_plan_edt, detail_plan_edt, memo_plan_edt;
-    CheckBox check_today, check_todo;
+    CheckBox check_Plan;
     DatePickerDialog datePickerDialog;
-    Button plan_add_btn, start_btn, finish_btn;
+    Button plan_add_btn;
     Button btn_tea, btn_android, btn_walk, btn_bus, btn_money, btn_star, btn_heart, btn_health, btn_smile, btn_airplane, btn_pet, btn_thumbsUp, btn_water, btn_code, btn_score;
     String str_title_edt, str_memo_edt, str_icon;
+    int  total_Plan_int, count_Plan_int;
+    boolean check_Plan_bool;
     Dialog dialog;
-    int total_Plan_int, count_Plan_int;
     RadioGroup rdoG;
     RadioButton rdo_week, rdo_month;
     Context context = this;
@@ -133,14 +134,19 @@ public class PlanAddActivity extends AppCompatActivity {
                     // 빈칸 있으면 저장 안되게
                     Toast.makeText(PlanAddActivity.this, "빈칸이 존재합니다.", Toast.LENGTH_SHORT).show();
                 } else {
-
-
+                    if(check_Plan.isChecked()){
+                        check_Plan_bool = true;
+                    }
+                    else{
+                        check_Plan_bool = false;
+                    }
                     Plan plan = new Plan();
                     plan.setTitle_Plan(str_title_edt);
                     plan.setMemo_Plan(str_memo_edt);
                     plan.setTotal_Plan(total_Plan_int);
                     plan.setCount_Plan(0);
                     plan.setIcon_Plan(str_icon);
+                    plan.setCheck_Plan(check_Plan_bool);
                     System.out.println("test total " + total_Plan_int);
 
                     db.collection("User").document(auth.getCurrentUser().getUid()).collection("Plan").add(plan).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -244,6 +250,8 @@ public class PlanAddActivity extends AppCompatActivity {
         rdoG = findViewById(R.id.rdoG);
         rdo_week = findViewById(R.id.rdo_week);
         rdo_month = findViewById(R.id.rdo_month);
+
+        check_Plan = findViewById(R.id.todo_check);
 
         btn_walk = dialog.findViewById(R.id.btn_walk);
         btn_tea = dialog.findViewById(R.id.btn_tea);
