@@ -1,28 +1,20 @@
-package com.example.jplan;
+package com.example.jplan.Mypage;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
-import android.widget.TextView;
-import android.widget.Toolbar;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.jplan.Main.MainActivity;
+import com.example.jplan.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-
-import org.w3c.dom.Text;
 
 public class MypageFragment extends Fragment {
     CalendarView calendarView;
@@ -77,5 +69,7 @@ public class MypageFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((MainActivity)getActivity()).tb_title.setText("Mypage");
+        ((MainActivity) getActivity()).addBtn.setVisibility(View.GONE);
+
     }
 }

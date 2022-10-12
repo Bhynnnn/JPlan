@@ -1,4 +1,4 @@
-package com.example.jplan;
+package com.example.jplan.Today;
 
 
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.jplan.Main.MainActivity;
+import com.example.jplan.Model.Today;
+import com.example.jplan.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

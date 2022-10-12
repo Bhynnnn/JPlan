@@ -1,5 +1,6 @@
-package com.example.jplan;
+package com.example.jplan.Main;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +10,6 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
@@ -25,6 +24,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.jplan.Diary.DiaryFragment;
+import com.example.jplan.Mypage.MypageFragment;
+import com.example.jplan.Plan.PlanFragment;
+import com.example.jplan.R;
+import com.example.jplan.Today.TodayFragment;
+import com.example.jplan.Todo.TodoFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;

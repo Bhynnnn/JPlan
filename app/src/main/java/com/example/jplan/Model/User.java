@@ -1,4 +1,4 @@
-package com.example.jplan;
+package com.example.jplan.Model;
 
 public class User {
     private String emailId;

@@ -1,4 +1,4 @@
-package com.example.jplan;
+package com.example.jplan.Todo;
 
 public class Todo {
 

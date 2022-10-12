@@ -4,5 +4,6 @@
     </style>
     <style name="toolbar" parent="@style/Base.TextAppearance.AppCompat.Title">
         <item name="android:textSize">25dp</item>
+        <item name="android:backgroundTint">@color/main</item>
     </style>
 </resources>

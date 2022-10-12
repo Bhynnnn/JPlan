@@ -1,28 +1,23 @@
-package com.example.jplan;
+package com.example.jplan.Today;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.jplan.Model.Constants;
+import com.example.jplan.Main.MainActivity;
+import com.example.jplan.Model.Today;
+import com.example.jplan.R;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -115,12 +110,6 @@ public class TodayFragment extends Fragment {
         super.onResume();
         ((MainActivity)getActivity()).tb_title.setText("Today");
 
-        ((MainActivity) getActivity()).addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), TodayAddActivity.class);
-                startActivity(intent);
-            }
-        });
+        ((MainActivity) getActivity()).addBtn.setVisibility(View.VISIBLE);
     }
 }

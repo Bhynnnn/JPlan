@@ -1,32 +1,26 @@
-package com.example.jplan;
+package com.example.jplan.Plan;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import com.example.jplan.Model.Constants;
+import com.example.jplan.Main.MainActivity;
+import com.example.jplan.Model.Plan;
+import com.example.jplan.R;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -113,6 +107,8 @@ public class PlanFragment extends Fragment {
 
         ((MainActivity) getActivity()).tb_title.setText("Plan");
         System.out.println("fragment test onresume");
+        ((MainActivity) getActivity()).addBtn.setVisibility(View.VISIBLE);
+
         ((MainActivity) getActivity()).addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

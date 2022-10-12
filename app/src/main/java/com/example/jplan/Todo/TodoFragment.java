@@ -1,5 +1,4 @@
-package com.example.jplan;
-import android.content.Intent;
+package com.example.jplan.Todo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +16,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.jplan.Main.MainActivity;
+import com.example.jplan.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -198,5 +199,7 @@ public class TodoFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((MainActivity) getActivity()).tb_title.setText("Todo");
+        ((MainActivity) getActivity()).addBtn.setVisibility(View.GONE);
+
     }
 }

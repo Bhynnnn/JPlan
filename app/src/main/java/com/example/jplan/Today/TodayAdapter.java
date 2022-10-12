@@ -1,14 +1,15 @@
-package com.example.jplan;
+package com.example.jplan.Today;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.jplan.Model.Today;
+import com.example.jplan.R;
 
 import java.util.ArrayList;
 
