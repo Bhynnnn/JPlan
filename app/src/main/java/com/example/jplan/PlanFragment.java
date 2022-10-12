@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,8 +35,6 @@ public class PlanFragment extends Fragment {
     private PlanAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Plan> mPlanData;
-    FloatingActionButton fabAdd;
-
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
 
@@ -78,24 +77,11 @@ public class PlanFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.scrollToPosition(0);
-//        for(int i=0; i<mPlanData.size(); i++){
-//            System.out.println("fragment test "+ mPlanData.get(i).toString());
-//        }
         System.out.println("fragment test oncreateview");
         mAdapter = new PlanAdapter(mPlanData);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        fabAdd = view.findViewById(R.id.fabAdd);
 
-        fabAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), PlanAddActivity.class);
-                startActivity(intent);
-            }
-        });
-//Fragment refresh
-        refreshRecyclerView(mRecyclerView);
         return view;
     }
 
@@ -121,19 +107,19 @@ public class PlanFragment extends Fragment {
 
     }
 
-    void refreshRecyclerView(RecyclerView recyclerView){
-        RecyclerView.Adapter adapterRef=recyclerView.getAdapter();
-        recyclerView.setAdapter(null);
-        recyclerView.setAdapter(adapterRef);
-    }
-
     @Override
     public void onResume() {
         super.onResume();
 
         ((MainActivity) getActivity()).tb_title.setText("Plan");
         System.out.println("fragment test onresume");
-
+        ((MainActivity) getActivity()).addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), PlanAddActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

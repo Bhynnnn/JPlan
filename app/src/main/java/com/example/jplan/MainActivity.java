@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -48,18 +49,22 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     public Toolbar toolbar;
     public TextView tb_title;
-    private String[] arrStr = {"Today", "Plan", "Todo", "Mypage"};
+    public Button addBtn;
+    private String[] arrStr = {"Today", "Plan", "Todo", "Diary","Mypage"};
+
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tb_title = findViewById(R.id.tb_title);
+        addBtn = findViewById(R.id.addBtn);
         Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_menu, null);
         drawable = DrawableCompat.wrap(drawable);
         DrawableCompat.setTint(drawable, Color.BLACK);
 
         toolbar = findViewById(R.id.toolbar);
+        toolbar.setBackgroundColor(Color.rgb(221, 234, 253));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
@@ -104,14 +109,16 @@ public class MainActivity extends AppCompatActivity {
         Fragment Today = new TodayFragment();
         Fragment Todo = new TodoFragment().newInstance();
         Fragment Mypage = new MypageFragment().newInstance();
+        Fragment Diary = new DiaryFragment().newInstance();
 
         mViewPager = findViewById(R.id.viewpager);
-        mViewPager.setOffscreenPageLimit(4);
+        mViewPager.setOffscreenPageLimit(5);
         tabLayout = findViewById(R.id.tab_layout);
         viewPagerAdapter = new ViewPagerAdapter(this);
         viewPagerAdapter.addFrag(Today);
         viewPagerAdapter.addFrag(Plan);
         viewPagerAdapter.addFrag(Todo);
+        viewPagerAdapter.addFrag(Diary);
         viewPagerAdapter.addFrag(Mypage);
         mViewPager.setUserInputEnabled(false);
         mViewPager.setAdapter(viewPagerAdapter);
@@ -146,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public void onBackPressed() {

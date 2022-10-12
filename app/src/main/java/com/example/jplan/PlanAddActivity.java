@@ -44,7 +44,7 @@ public class PlanAddActivity extends AppCompatActivity {
     Button plan_add_btn;
     Button btn_tea, btn_android, btn_walk, btn_bus, btn_money, btn_star, btn_heart, btn_health, btn_smile, btn_airplane, btn_pet, btn_thumbsUp, btn_water, btn_code, btn_score;
     String str_title_edt, str_memo_edt, str_icon;
-    int  total_Plan_int, count_Plan_int;
+    int total_Plan_int, count_Plan_int;
     boolean check_Plan_bool;
     Dialog dialog;
     RadioGroup rdoG;
@@ -134,10 +134,9 @@ public class PlanAddActivity extends AppCompatActivity {
                     // 빈칸 있으면 저장 안되게
                     Toast.makeText(PlanAddActivity.this, "빈칸이 존재합니다.", Toast.LENGTH_SHORT).show();
                 } else {
-                    if(check_Plan.isChecked()){
+                    if (check_Plan.isChecked()) {
                         check_Plan_bool = true;
-                    }
-                    else{
+                    } else {
                         check_Plan_bool = false;
                     }
                     Plan plan = new Plan();
@@ -159,7 +158,6 @@ public class PlanAddActivity extends AppCompatActivity {
                             }
                         }
                     });
-//                    }
                     onRestart();
                 }
 

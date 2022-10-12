@@ -25,7 +25,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import org.w3c.dom.Text;
 
 public class MypageFragment extends Fragment {
-    TextView mypage_name, mypage_email;
     CalendarView calendarView;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -49,20 +48,18 @@ public class MypageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mypage, container, false);
-        mypage_name = view.findViewById(R.id.mypage_name);
-        mypage_email = view.findViewById(R.id.mypage_email);
         calendarView = (CalendarView) view.findViewById(R.id.calendarView);
 
-        mypage_email.setText(auth.getCurrentUser().getEmail());
-        db.collection("User").document(auth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    System.out.println("task test"+task.getResult().get("name"));
-                    mypage_name.setText(task.getResult().get("name").toString());
-                }
-            }
-        });
+//        mypage_email.setText(auth.getCurrentUser().getEmail());
+//        db.collection("User").document(auth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                if(task.isSuccessful()){
+//                    System.out.println("task test"+task.getResult().get("name"));
+//                    mypage_name.setText(task.getResult().get("name").toString());
+//                }
+//            }
+//        });
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -80,7 +77,5 @@ public class MypageFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((MainActivity)getActivity()).tb_title.setText("Mypage");
-//        ((MainActivity)getActivity()).tb_title.setTextColor(R.color.white);
-//        ((MainActivity)getActivity()).toolbar.setBackgroundColor(R.color.main_dark);
     }
 }

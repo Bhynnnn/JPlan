@@ -10,18 +10,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JPlan">
         <activity
+            android:name=".DiaryAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PlanShowActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".PlanAddActivity"
             android:exported="false"
-            android:theme="@style/Theme.Design.Light.NoActionBar" />
-
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".TodayAddActivity"
             android:exported="false"
-            android:theme="@style/Theme.Design.Light.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".RegisterActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".LoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.Design.Light.NoActionBar">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,17 +39,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Design.Light.NoActionBar" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Design.Light.NoActionBar" />
-        <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
     </application>
 
 </manifest>

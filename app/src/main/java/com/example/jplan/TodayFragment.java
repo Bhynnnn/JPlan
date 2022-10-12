@@ -37,7 +37,6 @@ public class TodayFragment extends Fragment {
     private TodayAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Today> mTodayData;
-    FloatingActionButton fabAdd;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -59,15 +58,7 @@ public class TodayFragment extends Fragment {
         mAdapter = new TodayAdapter(mTodayData);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        fabAdd = view.findViewById(R.id.fabAdd);
 
-        fabAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), TodayAddActivity.class);
-                startActivity(intent);
-            }
-        });
         return view;
     }
 
@@ -123,5 +114,13 @@ public class TodayFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((MainActivity)getActivity()).tb_title.setText("Today");
+
+        ((MainActivity) getActivity()).addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), TodayAddActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

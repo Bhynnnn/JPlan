@@ -1,53 +1,45 @@
 package com.example.jplan;
 
-import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.style.ClickableSpan;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldPath;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.Transaction;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
     private ArrayList<Plan> mDataset;
     private Context context;
     Plan newPlan = new Plan();
 
+    GestureDetector gd;
+    GestureDetector.OnDoubleTapListener listener;
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     int count;
     public PlanAdapter(ArrayList data) {
+        System.out.println("todo adapter data 0 " + data);
+
         mDataset = data;
+
     }
 
     @Override
@@ -62,13 +54,11 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
     public void onBindViewHolder(PlanAdapter.ViewHolder holder, int position) {
 
         Plan plan = mDataset.get(position);
+        System.out.println("todo adapter data 1 " + mDataset);
+
         holder.setItem(plan);
         System.out.println("plan adapter icon " + plan.getIcon_Plan());
         System.out.println("plan adapter title " + plan.getTitle_Plan());
-
-        // TODO: 2022/06/08 두번째 하얀 원 -> 물 차오르는 느낌으로 해아함 1~30 || 1~7 ---
-        // TODO: 2022/06/09 아니 그 뭐여 그 그그그 처음 라디오로 일 수 체크하잖아 그게 days_Plan 이 변수에 들어가는거고
-        // TODO: 2022/06/09 더블클릭 했을 때 까이는걸로? 하면 기억 못하니 하나 더 만들어야하네
 
         // 횟수 첫 세팅
         holder.total_tv.setText(String.valueOf(plan.getTotal_Plan()));
@@ -158,8 +148,17 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
 
             @Override
             public void onSingleClick() {
+                // 상세보기
                 Toast.makeText(context, "single" + holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
-                // TODO: 2022/06/08 싱글탭 -> 상세보기
+                Intent intent = new Intent(context, PlanShowActivity.class);
+                intent.putExtra("check_Plan", String.valueOf(plan.isCheck_Plan()));
+                intent.putExtra("title_Plan", plan.getTitle_Plan());
+                intent.putExtra("total_Plan", String.valueOf(plan.getTotal_Plan()));
+                intent.putExtra("memo_Plan", plan.getMemo_Plan());
+                intent.putExtra("icon_Plan", plan.getIcon_Plan());
+                context.startActivity(intent);
+
+
             }
 
         });

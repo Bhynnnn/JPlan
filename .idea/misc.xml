@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-anydpi/ic_action_name.xml" value="0.1805" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/add_small.xml" value="0.105" />
         <entry key="app/src/main/res/drawable/airplane_ic.xml" value="0.105" />
+        <entry key="app/src/main/res/drawable/android_ic.xml" value="0.1805" />
         <entry key="app/src/main/res/drawable/back_circle.xml" value="0.1305" />
         <entry key="app/src/main/res/drawable/baseline_android_24.xml" value="0.105" />
         <entry key="app/src/main/res/drawable/baseline_attach_money_24.xml" value="0.133" />
@@ -33,26 +35,35 @@
         <entry key="app/src/main/res/drawable/ic_floating_add.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/light_component.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/money_ic.xml" value="0.1565" />
         <entry key="app/src/main/res/drawable/percent_50.xml" value="0.1305" />
+        <entry key="app/src/main/res/drawable/raduis_border.xml" value="0.1565" />
         <entry key="app/src/main/res/drawable/score_ic.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/star_ic.xml" value="0.105" />
         <entry key="app/src/main/res/drawable/today_light.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/white_circle.xml" value="0.1305" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_add_diary.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/layout/activity_diary_add.xml" value="0.3080708661417323" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1313369750976563" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.5414091470951793" />
         <entry key="app/src/main/res/layout/activity_plan_add.xml" value="0.25361328125" />
+        <entry key="app/src/main/res/layout/activity_plan_show.xml" value="0.15427834647042404" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_today_add.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.3420516967773438" />
-        <entry key="app/src/main/res/layout/fragment_plan.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.17835083007812502" />
+        <entry key="app/src/main/res/layout/fragment_diary.xml" value="0.2053872053872054" />
+        <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_plan.xml" value="0.20728759765625" />
         <entry key="app/src/main/res/layout/fragment_today.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_todo.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_todo.xml" value="0.16" />
         <entry key="app/src/main/res/layout/icon_dialog.xml" value="0.1004867553710937" />
         <entry key="app/src/main/res/layout/item_plan.xml" value="0.44160156250000004" />
-        <entry key="app/src/main/res/layout/item_today.xml" value="0.4356955380577428" />
+        <entry key="app/src/main/res/layout/item_today.xml" value="0.2319968075889928" />
+        <entry key="app/src/main/res/layout/item_todo.xml" value="0.30463867187500004" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.3225806451612903" />
+        <entry key="app/src/main/res/menu/add_menu.xml" value="0.171875" />
         <entry key="app/src/main/res/menu/navi_menu.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1805" />
       </map>
     </option>
   </component>
