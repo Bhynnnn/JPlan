@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.jplan.Main.MainActivity;
+import com.example.jplan.Model.Constants;
 import com.example.jplan.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -102,9 +103,9 @@ public class TodoFragment extends Fragment {
                 // arr = ["0", "title1", "title2", "title3"]
                 for (QueryDocumentSnapshot item : queryDocumentSnapshots) {
                     System.out.println("todoFragment item id " + item.getId());
-                    System.out.println("todoFragment item title " + item.get("title_Plan"));
+                    System.out.println("todoFragment item title " + item.get(Constants.TITLE_PLAN));
 
-                    arr.add(String.valueOf(item.get("title_Plan")));
+                    arr.add(String.valueOf(item.get(Constants.TITLE_PLAN)));
                     // plan에서의 ischecked 가 true 인 item의 title 값을 arr에 담음
 
                     // 이 array들은 spinner 에 보여야함

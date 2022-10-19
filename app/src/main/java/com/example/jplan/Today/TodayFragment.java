@@ -1,5 +1,6 @@
 package com.example.jplan.Today;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,10 +8,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.jplan.Diary.DiaryAddActivity;
 import com.example.jplan.Model.Constants;
 import com.example.jplan.Main.MainActivity;
 import com.example.jplan.Model.Today;
@@ -33,6 +37,8 @@ public class TodayFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Today> mTodayData;
 
+    private RecyclerView mReCyclerView_Calendar;
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
 
@@ -54,6 +60,26 @@ public class TodayFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
+        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initDataset();
+
+                mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+                mRecyclerView.setHasFixedSize(true);
+                mLayoutManager = new LinearLayoutManager(getActivity());
+                mRecyclerView.setLayoutManager(mLayoutManager);
+                mRecyclerView.scrollToPosition(0);
+                mAdapter = new TodayAdapter(mTodayData);
+                mRecyclerView.setAdapter(mAdapter);
+                mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.detach(TodayFragment.this).attach(TodayFragment.this).commit();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         return view;
     }
 
@@ -105,11 +131,20 @@ public class TodayFragment extends Fragment {
         });
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
+
         ((MainActivity)getActivity()).tb_title.setText("Today");
 
         ((MainActivity) getActivity()).addBtn.setVisibility(View.VISIBLE);
+        ((MainActivity) getActivity()).addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), TodayAddActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

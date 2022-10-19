@@ -131,6 +131,7 @@ public class DiaryAddActivity extends AppCompatActivity {
                                 Intent intent = new Intent(DiaryAddActivity.this, DiaryFragment.class);
                                 startActivity(intent);
                                 finish();
+                                // 다시 돌아올때 리프레시 해야함,,,,,
 
                             } else {
                                 Toast.makeText(DiaryAddActivity.this, "사진이 정상적으로 업로드 되지 않았습니다.", Toast.LENGTH_SHORT).show();

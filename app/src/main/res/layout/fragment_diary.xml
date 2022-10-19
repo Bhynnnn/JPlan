@@ -58,10 +58,10 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/white"
             android:text="어제"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:backgroundTint="@color/white"
             android:textSize="15dp" />
 
         <TextView
@@ -78,10 +78,10 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textAlignment="center"
-            android:textColor="@color/black"
             android:backgroundTint="@color/white"
             android:text="내일"
+            android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="15dp" />
     </LinearLayout>
 
@@ -107,7 +107,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
-            android:background="@drawable/logo"/>
+            android:background="@drawable/logo" />
     </LinearLayout>
 
     <LinearLayout
@@ -139,8 +139,8 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
         android:layout_marginTop="20dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/guideline_left"
         app:layout_constraintRight_toLeftOf="@id/guideline_right"
@@ -158,14 +158,15 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="30dp">
+
             <TextView
                 android:id="@+id/diary_content_tv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:textColor="@color/black"
                 android:text="저장된 일기가 없습니다. "
+                android:textColor="@color/black"
                 android:textSize="15dp" />
         </ScrollView>
 

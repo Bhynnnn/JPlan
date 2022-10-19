@@ -1,6 +1,11 @@
 package com.example.jplan.Model;
 
 public class Today {
+    private String title_Today;
+    private String start_Today;
+    private String finish_Today;
+    private String memo_Today;
+    private int time_Today;
     public Today() {
 
     }
@@ -37,11 +42,6 @@ public class Today {
         this.memo_Today = memo_Today;
     }
 
-    private String title_Today;
-    private String start_Today;
-    private String finish_Today;
-    private String memo_Today;
-
     public int getTime_Today() {
         return time_Today;
     }
@@ -50,7 +50,6 @@ public class Today {
         this.time_Today = time_Today;
     }
 
-    private int time_Today;
 
     public Today(int time_Today, String title_Today, String start_Today, String finish_Today, String memo_Today) {
         this.title_Today = title_Today;

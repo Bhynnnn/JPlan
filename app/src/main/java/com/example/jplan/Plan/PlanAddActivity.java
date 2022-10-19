@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -280,4 +281,6 @@ public class PlanAddActivity extends AppCompatActivity {
         btn_water.setOnClickListener(btnOnClick);
         btn_airplane.setOnClickListener(btnOnClick);
     }
+
+
 }

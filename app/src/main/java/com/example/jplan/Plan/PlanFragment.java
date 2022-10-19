@@ -3,10 +3,14 @@ package com.example.jplan.Plan;
 import android.content.Intent;
 import android.os.Bundle;
 
+
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +20,8 @@ import com.example.jplan.Model.Constants;
 import com.example.jplan.Main.MainActivity;
 import com.example.jplan.Model.Plan;
 import com.example.jplan.R;
+import com.example.jplan.Today.TodayAdapter;
+import com.example.jplan.Today.TodayFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -65,7 +71,6 @@ public class PlanFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
         getActivity().setTitle("Plan");
-
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 //        mLayoutManager = new LinearLayoutManager(getActivity());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
@@ -76,6 +81,25 @@ public class PlanFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
+        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initDataset();
+
+                mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+                mRecyclerView.setLayoutManager(gridLayoutManager);
+                mRecyclerView.scrollToPosition(0);
+                System.out.println("fragment test oncreateview");
+                mAdapter = new PlanAdapter(mPlanData);
+                mRecyclerView.setAdapter(mAdapter);
+                mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.detach(PlanFragment.this).attach(PlanFragment.this).commit();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         return view;
     }
 
@@ -89,9 +113,9 @@ public class PlanFragment extends Fragment {
                     str_title = item.get(Constants.TITLE_PLAN).toString();
                     str_memo = item.get(Constants.MEMO_PLAN).toString();
                     str_icon = item.get(Constants.ICON_PLAN).toString();
-                    total_Plan_int = Integer.parseInt(item.get("total_Plan").toString());
-                    count_Plan_int = Integer.parseInt(item.get("count_Plan").toString());
-                    check_Plan_bool = Boolean.parseBoolean(item.get("check_Plan").toString());
+                    total_Plan_int = Integer.parseInt(item.get(Constants.TOTAL_PLAN).toString());
+                    count_Plan_int = Integer.parseInt(item.get(Constants.COUNT_PLAN).toString());
+                    check_Plan_bool = Boolean.parseBoolean(item.get(Constants.CHECK_PLAN).toString());
                     mPlanData.add(new Plan(str_title, str_memo, str_icon, total_Plan_int, count_Plan_int, check_Plan_bool));
                 }
                 mAdapter.notifyDataSetChanged();
@@ -118,4 +142,7 @@ public class PlanFragment extends Fragment {
         });
 
     }
+
+
+
 }

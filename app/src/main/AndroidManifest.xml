@@ -11,31 +11,25 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.JPlan">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".Diary.DiaryAddActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme" />
+            android:exported="false"/>
         <activity
             android:name=".Plan.PlanShowActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme" />
+            android:exported="false"/>
         <activity
             android:name=".Plan.PlanAddActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme" />
+            android:exported="false"/>
         <activity
             android:name=".Today.TodayAddActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme" />
+            android:exported="false"/>
         <activity
             android:name=".Main.RegisterActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme" />
+            android:exported="false"/>
         <activity
             android:name=".Main.LoginActivity"
-            android:exported="true"
-            android:theme="@style/AppTheme">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,8 +39,7 @@
         <activity
             android:name=".Main.MainActivity"
             android:exported="false"
-            android:launchMode="singleTask"
-            android:theme="@style/Theme.Design.Light.NoActionBar" />
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>

@@ -89,6 +89,7 @@ public class TodayAddActivity extends AppCompatActivity {
                     today.setFinish_Today(str_finishT);
                     today.setMemo_Today(str_memo);
 
+                    System.out.println("timeStamp_date today " + timestamp_date);
                     firebaseFirestore.collection("User").document(auth.getCurrentUser()
                             .getUid()).collection("Today").document(timestamp_date).collection("PlanByTime").add(today).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                         @Override

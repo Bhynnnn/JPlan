@@ -11,6 +11,7 @@ public class Constants {
     public static String ICON_PLAN = "icon_Plan";
     public static String COUNT_PLAN = "count_Plan";
     public static String TOTAL_PLAN = "total_Plan";
+    public static String CHECK_PLAN = "check_Plan";
     public static String TITLE_TODO = "title_Todo";
     public static String CHECK_TODO = "isChecked_Todo";
 

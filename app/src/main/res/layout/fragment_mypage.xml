@@ -5,113 +5,121 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="30dp">
+        android:layout_margin="30dp"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Calendar"
             android:layout_gravity="center"
+            android:text="Calendar"
+            android:textColor="@color/black"
             android:textSize="20dp"
-            android:textColor="@color/black"/>
-        <CalendarView
+            android:layout_marginBottom="10dp"/>
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/calendarView"
-            android:layout_width="match_parent"
+            app:mcv_selectionColor="@color/main"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="목표 달성률"
-        android:layout_marginTop="30dp"
         android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="목표 달성률"
         android:textColor="@color/black"
-        android:textSize="20dp"/>
+        android:textSize="20dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp">
+        android:layout_marginRight="30dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
             android:text="Plan"
-            android:gravity="center"
-            android:textSize="20dp"
             android:textColor="@color/black"
-            android:layout_weight="1"/>
+            android:textSize="20dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="80 %"
+            android:layout_weight="1"
             android:gravity="center"
-            android:textSize="20dp"
+            android:text="80 %"
             android:textColor="@color/black"
-            android:layout_weight="1"/>
+            android:textSize="20dp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp">
+        android:layout_marginRight="30dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Todo"
+            android:layout_weight="1"
             android:gravity="center"
-            android:textSize="20dp"
+            android:text="Todo"
             android:textColor="@color/black"
-            android:layout_weight="1"/>
+            android:textSize="20dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="60 %"
+            android:layout_weight="1"
             android:gravity="center"
-            android:textSize="20dp"
+            android:text="60 %"
             android:textColor="@color/black"
-            android:layout_weight="1"/>
+            android:textSize="20dp" />
     </LinearLayout>
 
     <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginLeft="30dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginRight="30dp">
-
-    <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Diary"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:layout_weight="1"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="40 %"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:layout_weight="1"/>
-</LinearLayout>
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Diary"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="40 %"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+    </LinearLayout>
 
 
 </LinearLayout>
