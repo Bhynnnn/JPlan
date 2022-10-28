@@ -3,12 +3,12 @@ package com.example.jplan.Todo;
 public class Todo {
 
 
-    private String title;
-    private String check;
+    String title;
+    String isSelected;
 
-    public Todo(String title, String check) {
+    public Todo(String title, String isSelected) {
         this.title = title;
-        this.check = check;
+        this.isSelected = isSelected;
 
     }
     public Todo() {
@@ -23,12 +23,12 @@ public class Todo {
         this.title = title;
     }
 
-    public String isCheck() {
-        return check;
+    public String getSelected()
+    {
+        return isSelected;
     }
-
-    public void setCheck(String check) {
-        this.check = check;
-    }
-}
+    public void setSelected(String selected)
+    {
+        isSelected = selected;
+    }}
 

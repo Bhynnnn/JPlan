@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterActivity extends AppCompatActivity {
-    Button add_account_btn;
+    Button add_account_btn, btn_login;
     EditText email_edt, name_edt, pw_edt, pwA_edt;
     String email, name, pw, pwAgain;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -36,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
         name_edt = findViewById(R.id.name_edt);
         pw_edt = findViewById(R.id.pw_edt);
         pwA_edt = findViewById(R.id.pwA_edt);
-
+        btn_login = findViewById(R.id.btn_login);
 
         add_account_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +84,15 @@ public class RegisterActivity extends AppCompatActivity {
 
                 Intent createAccount = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(createAccount);
+                finish();
+            }
+        });
+
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
                 finish();
             }
         });

@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         findID_btn = findViewById(R.id.findID_btn);
         findPW_btn = findViewById(R.id.findPW_btn);
 
+        findViewById(R.id.login_btn).bringToFront();
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

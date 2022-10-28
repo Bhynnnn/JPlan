@@ -68,8 +68,8 @@ public class MypageFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity)getActivity()).tb_title.setText("Mypage");
-        ((MainActivity) getActivity()).addBtn.setVisibility(View.GONE);
+//        ((MainActivity)getActivity()).tb_title.setText("Mypage");
+//        ((MainActivity) getActivity()).addBtn.setVisibility(View.GONE);
 
     }
 }

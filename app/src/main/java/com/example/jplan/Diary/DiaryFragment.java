@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 import static java.lang.Integer.parseInt;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -27,8 +29,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.jplan.Main.MainActivity;
 import com.example.jplan.Model.Diary;
+import com.example.jplan.Model.mCalendar;
 import com.example.jplan.Plan.PlanAdapter;
 import com.example.jplan.R;
+import com.example.jplan.Today.CalendarAdapter;
 import com.example.jplan.Today.TodayFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,6 +47,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -55,9 +60,13 @@ import java.util.Locale;
  */
 public class DiaryFragment extends Fragment {
 
-    Button yesterday_btn, tomorrow_btn;
-    TextView today_tv, icon_tv, diary_content_tv;
-    ImageView diary_pic;
+    Button diary_add_btn;
+    TextView today_tv;
+    static TextView icon_tv;
+    static TextView diary_content_tv;
+    static ImageView diary_pic;
+    String str_year, str_month, str_day, str_date;
+
     Date toTimeStamp = new Date();
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -70,9 +79,14 @@ public class DiaryFragment extends Fragment {
     SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
     String chkDate = SDF.format(calendar.getTime());
 
+    private RecyclerView mRecyclerView_calendar;
+    private DiaryAdapter mAdapter_calendar;
+    private RecyclerView.LayoutManager mLayoutManager_calendar;
+    private ArrayList<mCalendar> mCalendarData;
 
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    static Context context;
+    static FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    static FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     public DiaryFragment() {
         // Required empty public constructor
@@ -94,50 +108,125 @@ public class DiaryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_diary, container, false);
-        yesterday_btn = view.findViewById(R.id.yesterday_btn);
-        tomorrow_btn = view.findViewById(R.id.tomorrow_btn);
+//        yesterday_btn = view.findViewById(R.id.yesterday_btn);
+//        tomorrow_btn = view.findViewById(R.id.tomorrow_btn);
         diary_pic = view.findViewById(R.id.diary_pic);
         diary_content_tv = view.findViewById(R.id.diary_content_tv);
         today_tv = view.findViewById(R.id.today_tv);
         icon_tv = view.findViewById(R.id.icon_tv);
+        diary_add_btn = view.findViewById(R.id.diary_add_btn);
+        getCalendarData();
+        mRecyclerView_calendar = (RecyclerView) view.findViewById(R.id.recyclerView_calendar);
+        mLayoutManager_calendar = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
+        mRecyclerView_calendar.setLayoutManager(mLayoutManager_calendar);
+        mAdapter_calendar = new DiaryAdapter(mCalendarData, DiaryFragment.this);
+        mRecyclerView_calendar.setAdapter(mAdapter_calendar);
+        mRecyclerView_calendar.setItemAnimator(new DefaultItemAnimator());
+        showDiary(timestamp_date);
+
+        context = getContext();
 
         today_tv.setText(timestamp_date);
 
         System.out.println("timestamp date " + timestamp_date);
 
-        showDiary(timestamp_date);
         System.out.println("date format " + day);
 
-        yesterday_btn.setOnClickListener(new View.OnClickListener() {
+//
+//        Glide.with(getContext())
+//                .load(R.drawable.jplan_logo)
+//                .into(diary_pic);
+//        icon_tv.setText("작성된 일기가 없습니다😅");
+//        diary_content_tv.setText("일기를 작성해주세요");
+
+
+        diary_add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calendar.add(Calendar.DATE, -1);
-                chkDate = SDF.format(calendar.getTime());
-                System.out.println("The day before: " + 1 + "일 " + chkDate);
-                today_tv.setText(chkDate);
-                showDiary(chkDate);
-
-            }
+                Intent intent = new Intent(getContext(), DiaryAddActivity.class);
+                startActivity(intent);            }
         });
-
-        tomorrow_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calendar.add(Calendar.DATE, 1);
-                chkDate = SDF.format(calendar.getTime());
-                System.out.println("The day after: " + 1 + "일 " + chkDate);
-                today_tv.setText(chkDate);
-                showDiary(chkDate);
-            }
-        });
-
 
         return view;
     }
 
-    public void showDiary(String timestamp_date) {
+    public String getDay(int date) {
+        String day = "";
+        switch (date) {
+            case 1:
+                day = "SUN";
+                break;
+            case 2:
+                day = "MON";
+                break;
+            case 3:
+                day = "TUE";
+                break;
+            case 4:
+                day = "WED";
+                break;
+            case 5:
+                day = "THU";
+                break;
+            case 6:
+                day = "FRI";
+                break;
+            case 7:
+                day = "SAT";
+                break;
 
+        }
+        return day;
+    }
 
+    private void getCalendarData() {
+        mCalendarData = new ArrayList<>();
+
+        //오늘 날짜
+        System.out.println("today date " + chkDate);
+
+        // 3일전
+        calendar.add(Calendar.DATE, -3);
+        chkDate = SDF.format(calendar.getTime());
+
+        System.out.println("The day before " + 1 + "일 " + chkDate);
+
+        String[] splitText;
+
+        splitText = chkDate.split("-");
+
+        for (int j = 0; j < splitText.length; j++) {
+            System.out.println(" text = " + splitText[j]);
+        }
+        str_year = splitText[0];
+        str_month = splitText[1];
+        str_date = splitText[2];
+        System.out.println("day of week " + calendar.get(Calendar.DAY_OF_WEEK));
+        str_day = getDay(calendar.get(Calendar.DAY_OF_WEEK));
+        mCalendarData.add(new mCalendar(str_year, str_month, str_date, str_day));
+
+        for (int i = 0; i < 6; i++) {
+            // 3일전
+            calendar.add(Calendar.DATE, 1);
+            chkDate = SDF.format(calendar.getTime());
+
+            System.out.println("The day before " + i + "일 " + chkDate);
+
+            splitText = chkDate.split("-");
+
+            for (int j = 0; j < splitText.length; j++) {
+                System.out.println(" text = " + splitText[j]);
+            }
+            str_year = splitText[0];
+            str_month = splitText[1];
+            str_date = splitText[2];
+            System.out.println("the day of week " + calendar.get(Calendar.DAY_OF_WEEK));
+            str_day = getDay(calendar.get(Calendar.DAY_OF_WEEK));
+            mCalendarData.add(new mCalendar(str_year, str_month, str_date, str_day));
+        }
+    }
+
+    public static void showDiary(String date) {
         firebaseFirestore.collection("User")
                 .document(firebaseAuth.getCurrentUser().getUid())
                 .collection("Diary")
@@ -146,34 +235,34 @@ public class DiaryFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            Glide.with(context)
+                                    .load(R.drawable.jplan_logo)
+                                    .into(diary_pic);
+                            icon_tv.setText("작성된 일기가 없습니다😅");
+                            diary_content_tv.setText("일기를 새로 작성해주세요");
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (document.getId().equals(timestamp_date)) {
+                                if (document.getId().equals(date)) {
+
                                     System.out.println("document getdata " + document.getData());
                                     System.out.println("document getid " + document.getId());
                                     System.out.println("document getdata icon " + document.get("imgUrl").toString());
 
-                                    Glide.with(getContext())
+                                    Glide.with(context)
                                             .load(document.get("imgUrl").toString())
                                             .into(diary_pic);
                                     icon_tv.setText(document.get("icon").toString());
                                     diary_content_tv.setText(document.get("diaryContent").toString());
 
-                                } else {
-                                    System.out.println("document fail");
-                                    Glide.with(getContext())
-                                            .load(R.drawable.logo)
-                                            .into(diary_pic);
-                                    icon_tv.setText("작성된 일기가 없습니다😅");
-                                    diary_content_tv.setText("일기를 새로 작성해주세요");
                                 }
 
                             }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
                         }
+                    {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
                     }
-                });
-    }
+                }
+    });
+}
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -182,14 +271,5 @@ public class DiaryFragment extends Fragment {
         today_tv.setText(timestamp_date);
         showDiary(timestamp_date);
 
-        ((MainActivity) getActivity()).tb_title.setText("Diary");
-        ((MainActivity) getActivity()).addBtn.setVisibility(View.VISIBLE);
-        ((MainActivity) getActivity()).addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), DiaryAddActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }

@@ -36,7 +36,8 @@ public class PlanAddActivity extends AppCompatActivity {
     CheckBox check_Plan;
     DatePickerDialog datePickerDialog;
     Button plan_add_btn;
-    Button btn_tea, btn_android, btn_walk, btn_bus, btn_money, btn_star, btn_heart, btn_health, btn_smile, btn_airplane, btn_pet, btn_thumbsUp, btn_water, btn_code, btn_score;
+    Button icon_1, icon_2, icon_3, icon_4, icon_5, icon_6, icon_7, icon_8, icon_9, icon_10;
+    Button  icon_11, icon_12, icon_13, icon_14, icon_15, icon_16, icon_17, icon_18;
     String str_title_edt, str_memo_edt, str_icon;
     int total_Plan_int, count_Plan_int;
     boolean check_Plan_bool;
@@ -163,66 +164,77 @@ public class PlanAddActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.btn_walk:
-                    item_img_plan.setBackgroundResource(R.drawable.walk_ic);
-                    str_icon = "walk";
+                case R.id.icon_1:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_1);
+                    str_icon = "icon_1";
                     break;
-                case R.id.btn_tea:
-                    item_img_plan.setBackgroundResource(R.drawable.tea_ic);
-                    str_icon = "tea";
+                case R.id.icon_2:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_2);
+                    str_icon = "icon_2";
                     break;
-                case R.id.btn_android:
-                    item_img_plan.setBackgroundResource(R.drawable.android_ic);
-                    str_icon = "android";
+                case R.id.icon_3:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_3);
+                    str_icon = "icon_3";
                     break;
-                case R.id.btn_thumbsUp:
-                    str_icon = "thumbsup";
-                    item_img_plan.setBackgroundResource(R.drawable.thumbsup_ic);
+                case R.id.icon_4:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_4);
+                    str_icon = "icon_4";
                     break;
-                case R.id.btn_bus:
-                    item_img_plan.setBackgroundResource(R.drawable.bus_ic);
-
-                    str_icon = "bus";
+                case R.id.icon_5:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_5);
+                    str_icon = "icon_5";
                     break;
-                case R.id.btn_health:
-                    item_img_plan.setBackgroundResource(R.drawable.health_ic);
-                    str_icon = "health";
+                case R.id.icon_6:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_6);
+                    str_icon = "icon_6";
                     break;
-                case R.id.btn_heart:
-                    item_img_plan.setBackgroundResource(R.drawable.heart_ic);
-                    str_icon = "heart";
+                case R.id.icon_7:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_7);
+                    str_icon = "icon_7";
                     break;
-                case R.id.btn_smile:
-                    item_img_plan.setBackgroundResource(R.drawable.smile_ic);
-                    str_icon = "smile";
+                case R.id.icon_8:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_8);
+                    str_icon = "icon_8";
                     break;
-                case R.id.btn_money:
-                    item_img_plan.setBackgroundResource(R.drawable.money_ic);
-                    str_icon = "money";
+                case R.id.icon_9:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_9);
+                    str_icon = "icon_9";
                     break;
-                case R.id.btn_pet:
-                    item_img_plan.setBackgroundResource(R.drawable.pet_ic);
-                    str_icon = "pet";
+                case R.id.icon_10:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_10);
+                    str_icon = "icon_10";
                     break;
-                case R.id.btn_code:
-                    item_img_plan.setBackgroundResource(R.drawable.code_ic);
-                    str_icon = "code";
+                case R.id.icon_11:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_11);
+                    str_icon = "icon_11";
                     break;
-                case R.id.btn_star:
-                    item_img_plan.setBackgroundResource(R.drawable.star_ic);
-                    str_icon = "star";
+                case R.id.icon_12:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_12);
+                    str_icon = "icon_12";
                     break;
-                case R.id.btn_score:
-                    item_img_plan.setBackgroundResource(R.drawable.score_ic);
-                    str_icon = "score";
+                case R.id.icon_13:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_13);
+                    str_icon = "icon_13";
                     break;
-                case R.id.btn_water:
-                    item_img_plan.setBackgroundResource(R.drawable.water_ic);
-                    str_icon = "water";
+                case R.id.icon_14:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_14);
+                    str_icon = "icon_14";
                     break;
-                case R.id.btn_airplane:
-                    item_img_plan.setBackgroundResource(R.drawable.airplane_ic);
-                    str_icon = "airplane";
+                case R.id.icon_15:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_15);
+                    str_icon = "icon_15";
+                    break;
+                case R.id.icon_16:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_16);
+                    str_icon = "icon_16";
+                    break;
+                case R.id.icon_17:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_17);
+                    str_icon = "icon17";
+                    break;
+                case R.id.icon_18:
+                    item_img_plan.setBackgroundResource(R.drawable.icon_18);
+                    str_icon = "icon18";
                     break;
                 default:
                     break;
@@ -245,41 +257,49 @@ public class PlanAddActivity extends AppCompatActivity {
 
         check_Plan = findViewById(R.id.todo_check);
 
-        btn_walk = dialog.findViewById(R.id.btn_walk);
-        btn_tea = dialog.findViewById(R.id.btn_tea);
-        btn_android = dialog.findViewById(R.id.btn_android);
-        btn_thumbsUp = dialog.findViewById(R.id.btn_thumbsUp);
-        btn_bus = dialog.findViewById(R.id.btn_bus);
-        btn_health = dialog.findViewById(R.id.btn_health);
-        btn_heart = dialog.findViewById(R.id.btn_heart);
-        btn_smile = dialog.findViewById(R.id.btn_smile);
-        btn_money = dialog.findViewById(R.id.btn_money);
-        btn_pet = dialog.findViewById(R.id.btn_pet);
-        btn_code = dialog.findViewById(R.id.btn_code);
-        btn_star = dialog.findViewById(R.id.btn_star);
-        btn_score = dialog.findViewById(R.id.btn_score);
-        btn_water = dialog.findViewById(R.id.btn_water);
-        btn_airplane = dialog.findViewById(R.id.btn_airplane);
+        icon_1 = dialog.findViewById(R.id.icon_1);
+        icon_2 = dialog.findViewById(R.id.icon_2);
+        icon_3 = dialog.findViewById(R.id.icon_3);
+        icon_4 = dialog.findViewById(R.id.icon_4);
+        icon_5 = dialog.findViewById(R.id.icon_5);
+        icon_6 = dialog.findViewById(R.id.icon_6);
+        icon_7 = dialog.findViewById(R.id.icon_7);
+        icon_8 = dialog.findViewById(R.id.icon_8);
+        icon_9 = dialog.findViewById(R.id.icon_9);
+        icon_10 = dialog.findViewById(R.id.icon_10);
+        icon_11 = dialog.findViewById(R.id.icon_11);
+        icon_12 = dialog.findViewById(R.id.icon_12);
+        icon_13 = dialog.findViewById(R.id.icon_13);
+        icon_14 = dialog.findViewById(R.id.icon_14);
+        icon_15 = dialog.findViewById(R.id.icon_15);
+        icon_16 = dialog.findViewById(R.id.icon_16);
+        icon_17 = dialog.findViewById(R.id.icon_17);
+        icon_18 = dialog.findViewById(R.id.icon_18);
+
+
     }
 
     public void listner() {
         BtnOnClick btnOnClick = new BtnOnClick();
 
-        btn_walk.setOnClickListener(btnOnClick);
-        btn_tea.setOnClickListener(btnOnClick);
-        btn_android.setOnClickListener(btnOnClick);
-        btn_thumbsUp.setOnClickListener(btnOnClick);
-        btn_bus.setOnClickListener(btnOnClick);
-        btn_heart.setOnClickListener(btnOnClick);
-        btn_health.setOnClickListener(btnOnClick);
-        btn_smile.setOnClickListener(btnOnClick);
-        btn_money.setOnClickListener(btnOnClick);
-        btn_pet.setOnClickListener(btnOnClick);
-        btn_code.setOnClickListener(btnOnClick);
-        btn_star.setOnClickListener(btnOnClick);
-        btn_score.setOnClickListener(btnOnClick);
-        btn_water.setOnClickListener(btnOnClick);
-        btn_airplane.setOnClickListener(btnOnClick);
+        icon_1.setOnClickListener(btnOnClick);
+        icon_2.setOnClickListener(btnOnClick);
+        icon_3.setOnClickListener(btnOnClick);
+        icon_4.setOnClickListener(btnOnClick);
+        icon_5.setOnClickListener(btnOnClick);
+        icon_6.setOnClickListener(btnOnClick);
+        icon_7.setOnClickListener(btnOnClick);
+        icon_8.setOnClickListener(btnOnClick);
+        icon_9.setOnClickListener(btnOnClick);
+        icon_10.setOnClickListener(btnOnClick);
+        icon_11.setOnClickListener(btnOnClick);
+        icon_12.setOnClickListener(btnOnClick);
+        icon_13.setOnClickListener(btnOnClick);
+        icon_14.setOnClickListener(btnOnClick);
+        icon_15.setOnClickListener(btnOnClick);
+        icon_16.setOnClickListener(btnOnClick);
+        icon_17.setOnClickListener(btnOnClick);
+        icon_18.setOnClickListener(btnOnClick);
     }
 
 

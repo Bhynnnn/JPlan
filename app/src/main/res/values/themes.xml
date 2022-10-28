@@ -1,6 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="tabIconTint">@color/main_dark</item>ta
+
     </style>
 
     <style name="toolbar" parent="@style/Base.TextAppearance.AppCompat.Title">

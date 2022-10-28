@@ -1,21 +1,19 @@
 package com.example.jplan.Main;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
-import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -54,35 +52,35 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    public Toolbar toolbar;
     public TextView tb_title;
     public Button addBtn;
-    private String[] arrStr = {"Today", "Plan", "Todo", "Diary","Mypage"};
+    private String[] arrStr = {"Today", "Plan", "Mypage", "Todo", "Diary"};
+    //    private int[] arrIcon = new int[]{R.drawable.today_tab, R.drawable.plan_tab, R.drawable.mypage_tab, R.drawable.todo_tab, R.drawable.diary_tab};
+    private int[] arrIcon = new int[]{R.drawable.today_tab, R.drawable.plan_tab, R.drawable.calendar_tab, R.drawable.todo_tab, R.drawable.diary_tab};
 
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tb_title = findViewById(R.id.tb_title);
-        addBtn = findViewById(R.id.addBtn);
+//        tb_title = findViewById(R.id.tb_title);
+//        addBtn = findViewById(R.id.addBtn);
         Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_menu, null);
         drawable = DrawableCompat.wrap(drawable);
         DrawableCompat.setTint(drawable, Color.BLACK);
 
-        toolbar = findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(Color.rgb(221, 234, 253));
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        toolbar = findViewById(R.id.toolbar);
+//        toolbar.setBackgroundColor(Color.rgb(221, 234, 253));
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
         mDrawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         auth = FirebaseAuth.getInstance();
         drawerToggle = new ActionBarDrawerToggle(
                 this,
                 mDrawerLayout,
-                toolbar,
                 R.string.drawer_open,
                 R.string.drawer_close
         );
@@ -124,20 +122,29 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter = new ViewPagerAdapter(this);
         viewPagerAdapter.addFrag(Today);
         viewPagerAdapter.addFrag(Plan);
+        viewPagerAdapter.addFrag(Mypage);
         viewPagerAdapter.addFrag(Todo);
         viewPagerAdapter.addFrag(Diary);
-        viewPagerAdapter.addFrag(Mypage);
+
         mViewPager.setUserInputEnabled(false);
         mViewPager.setAdapter(viewPagerAdapter);
         mViewPager.setCurrentItem(0, true);
+//        tabLayout.setTabIconTint(ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this,
+//                R.color.main_dark)));
+
 
         new TabLayoutMediator(tabLayout, mViewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 Log.d("MainActivity", String.valueOf(position));
-//                tab.setIcon(arr[position]);
-                tab.setText(arrStr[position]);
 
+                System.out.println("icon count " + tabLayout.getTabCount());
+                System.out.println("icon get tab count i " + position);
+                View view = getLayoutInflater().inflate(R.layout.view_home_tab, null);
+
+                if (tab != null) tab.setCustomView(view);
+
+                view.findViewById(R.id.tab_icon).setBackgroundResource(arrIcon[position]);
 
             }
         }).attach();

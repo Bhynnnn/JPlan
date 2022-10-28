@@ -28,6 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TodoFragment extends Fragment {
@@ -35,6 +37,7 @@ public class TodoFragment extends Fragment {
     private TodoAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Todo> mTodoData = new ArrayList<>();
+    private ArrayList<String> mTodoKeyData = new ArrayList();
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -42,7 +45,8 @@ public class TodoFragment extends Fragment {
     private EditText todo_edt;
     private Spinner plan_spinner;
     private Button add_todo_btn;
-    private String title_str, title_db, str_temp, isCheck_bool;
+    private String title_str, title_db, str_temp;
+    String isCheck_bool;
     ArrayAdapter<String> arrayAdapter;
     static ArrayList<String> arr;
 
@@ -76,16 +80,34 @@ public class TodoFragment extends Fragment {
         database.getReference().child("TodoList").child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    System.out.println("+++Todo snapshot children title " + dataSnapshot.child("title").getValue().toString());
-                    System.out.println("+++Todo snapshot children isChecked " + dataSnapshot.child("check").getValue().toString());
+                if(snapshot.exists()){
 
-                    title_db = dataSnapshot.child("title").getValue().toString();
-                    isCheck_bool = dataSnapshot.child("check").getValue().toString();
-                    mTodoData.add(new Todo(title_db, isCheck_bool));
+                    mTodoData.clear();
+                    mTodoKeyData.clear();
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        System.out.println("+++Todo snapshot children key 0 " + dataSnapshot);
+                        System.out.println("+++Todo snapshot children key 1 " + dataSnapshot.getKey());
+                        System.out.println("+++Todo snapshot children title " + dataSnapshot.child("title").getValue().toString());
+
+                        title_db = dataSnapshot.child("title").getValue().toString();
+                        System.out.println("+++Todo snapshot title " + title_db);
+                        isCheck_bool = dataSnapshot.child("selected").getValue().toString();
+                        System.out.println("+++Todo snapshot isCheck_bool " + isCheck_bool);
+
+                        mTodoData.add(new Todo(title_db, isCheck_bool));
+                        mTodoKeyData.add(dataSnapshot.getKey());
+                    }
+                    mAdapter.notifyDataSetChanged();
+
+                    for(int i=0; i<mTodoKeyData.size(); i++){
+                        System.out.println("+++Todo snapshot keyData " + mTodoKeyData.get(i));
+                    }
 
                 }
-                mAdapter.notifyDataSetChanged();
+                else{
+                    System.out.println("list 존재 x");
+                }
+
             }
 
             @Override
@@ -93,6 +115,7 @@ public class TodoFragment extends Fragment {
 
             }
         });
+
 
         firestore.collection("User").document(auth.getCurrentUser().getUid()).collection("Plan")
                 .whereEqualTo("check_Plan", true).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -143,6 +166,7 @@ public class TodoFragment extends Fragment {
             public void onClick(View v) {
 
                 mTodoData.clear();
+                mTodoKeyData.clear();
                 System.out.println("+++Todo 추가버튼 clicked");
 
                 title_str = todo_edt.getText().toString();
@@ -156,21 +180,24 @@ public class TodoFragment extends Fragment {
                         //edittext 값이 빈 값이 아님
                         Todo todo = new Todo();
                         todo.setTitle(title_str);
-                        todo.setCheck("false");
+                        todo.setSelected("false");
                         database.getReference().child("TodoList").child(auth.getCurrentUser().getUid()).push().setValue(todo);
                         System.out.println("+++Todo push 성공 - Plan에 저장한 것 추가");
-
+//                        mAdapter.notifyItemInserted(mTodoData.size());
                     }
                 }
                 else {
                     //edittext 값이 빈 값이 아님
                     Todo todo = new Todo();
                     todo.setTitle(title_str);
-                    todo.setCheck("false");
+                    todo.setSelected("false");
                     database.getReference().child("TodoList").child(auth.getCurrentUser().getUid()).push().setValue(todo);
                     System.out.println("+++Todo push 성공 - 새로 추가");
+//                    mAdapter.notifyItemInserted(mTodoData.size());
                 }
+                mAdapter.notifyDataSetChanged();
                 System.out.println("+++Todo mTodoData 0 " + mTodoData.size());
+                System.out.println("+++Todo mTodoKeyData " + mTodoKeyData.size());
 
                 todo_edt.setText("");
             }
@@ -187,7 +214,7 @@ public class TodoFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.scrollToPosition(0);
-        mAdapter = new TodoAdapter(mTodoData);
+        mAdapter = new TodoAdapter(mTodoData, mTodoKeyData);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -199,8 +226,6 @@ public class TodoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity) getActivity()).tb_title.setText("Todo");
-        ((MainActivity) getActivity()).addBtn.setVisibility(View.GONE);
 
     }
 }

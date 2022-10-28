@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center_horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="30dp"
+    android:layout_gravity="center"
     android:orientation="vertical">
 
     <LinearLayout
@@ -10,153 +11,180 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
-
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_walk"
-            android:layout_width="100dp"
-            android:backgroundTint="@color/black"
-            android:layout_height="100dp"
+            android:id="@+id/icon_1"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_margin="15dp"
-            android:background="@drawable/walk_ic" />
-
+            android:elevation="0dp"
+            android:background="@drawable/icon_1" />
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_tea"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:backgroundTint="@color/black"
+            android:id="@+id/icon_2"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_margin="15dp"
-            android:background="@drawable/tea_ic" />
-
+            android:elevation="0dp"
+            android:background="@drawable/icon_2" />
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_android"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:backgroundTint="@color/black"
+            android:id="@+id/icon_3"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_margin="15dp"
-            android:background="@drawable/android_ic" />
+            android:elevation="0dp"
+            android:background="@drawable/icon_3" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
-
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_thumbsUp"
-            android:layout_width="100dp"
-            android:backgroundTint="@color/black"
-            android:layout_height="100dp"
+            android:id="@+id/icon_4"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_margin="15dp"
-            android:background="@drawable/thumbsup_ic" />
-
+            android:elevation="0dp"
+            android:background="@drawable/icon_4" />
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_bus"
-            android:layout_width="100dp"
-            android:backgroundTint="@color/black"
-            android:layout_height="100dp"
+            android:id="@+id/icon_5"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_margin="15dp"
-            android:background="@drawable/bus_ic" />
-
+            android:elevation="0dp"
+            android:background="@drawable/icon_5" />
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_heart"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:backgroundTint="@color/black"
+            android:id="@+id/icon_6"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_margin="15dp"
-            android:background="@drawable/heart_ic" />
+            android:elevation="0dp"
+            android:background="@drawable/icon_6" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
-
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_health"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:backgroundTint="@color/black"
+            android:id="@+id/icon_7"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_margin="15dp"
-            android:background="@drawable/health_ic" />
-
+            android:elevation="0dp"
+            android:background="@drawable/icon_7" />
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_smile"
-            android:layout_width="100dp"
-            android:backgroundTint="@color/black"
-            android:layout_height="100dp"
+            android:id="@+id/icon_8"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_margin="15dp"
-            android:background="@drawable/smile_ic" />
-
+            android:elevation="0dp"
+            android:background="@drawable/icon_8" />
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_money"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/icon_9"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_margin="15dp"
-            android:backgroundTint="@color/black"
-            android:background="@drawable/money_ic" />
+            android:elevation="0dp"
+            android:background="@drawable/icon_9" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
-
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_pet"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/icon_10"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_margin="15dp"
-            android:backgroundTint="@color/black"
-            android:background="@drawable/pet_ic" />
-
+            android:elevation="0dp"
+            android:background="@drawable/icon_10" />
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_code"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/icon_11"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_margin="15dp"
-            android:backgroundTint="@color/black"
-            android:background="@drawable/code_ic" />
-
+            android:elevation="0dp"
+            android:background="@drawable/icon_11" />
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_star"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:backgroundTint="@color/black"
+            android:id="@+id/icon_12"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_margin="15dp"
-            android:background="@drawable/star_ic" />
+            android:elevation="0dp"
+            android:background="@drawable/icon_12" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
-
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_score"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/icon_13"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_margin="15dp"
-            android:backgroundTint="@color/black"
-            android:background="@drawable/score_ic" />
-
+            android:elevation="0dp"
+            android:background="@drawable/icon_13" />
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_water"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/icon_14"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_margin="15dp"
-            android:backgroundTint="@color/black"
-            android:background="@drawable/water_ic" />
-
+            android:elevation="0dp"
+            android:background="@drawable/icon_14" />
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_airplane"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/icon_15"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_margin="15dp"
-            android:backgroundTint="@color/black"
-            android:background="@drawable/airplane_ic" />
+            android:elevation="0dp"
+            android:background="@drawable/icon_15" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/icon_16"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="15dp"
+            android:elevation="0dp"
+            android:background="@drawable/icon_16" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/icon_17"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="15dp"
+            android:elevation="0dp"
+            android:background="@drawable/icon_17" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/icon_18"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="15dp"
+            android:elevation="0dp"
+            android:background="@drawable/icon_18" />
+    </LinearLayout>
+
 </LinearLayout>

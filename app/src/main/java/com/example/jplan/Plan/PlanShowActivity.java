@@ -51,52 +51,58 @@ public class PlanShowActivity extends AppCompatActivity {
             todo_check.setChecked(false);
         }
 
-        if (icon_str.equals("walk")) {
-            circle_iv.setBackgroundResource(R.drawable.walk_ic);
-        } else if (icon_str.equals("bus")) {
-            circle_iv.setBackgroundResource(R.drawable.bus_ic);
+        if (icon_str.equals("icon_1")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_1);
+        } else if (icon_str.equals("icon_2")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_2);
 
-        } else if (icon_str.equals("airplane")) {
-            circle_iv.setBackgroundResource(R.drawable.airplane_ic);
+        } else if (icon_str.equals("icon_3")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_3);
 
-        } else if (icon_str.equals("android")) {
-            circle_iv.setBackgroundResource(R.drawable.android_ic);
+        } else if (icon_str.equals("icon_4")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_4);
 
-        } else if (icon_str.equals("health")) {
-            circle_iv.setBackgroundResource(R.drawable.health_ic);
+        } else if (icon_str.equals("icon_5")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_5);
 
-        } else if (icon_str.equals("code")) {
-            circle_iv.setBackgroundResource(R.drawable.code_ic);
+        } else if (icon_str.equals("icon_6")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_6);
 
-        } else if (icon_str.equals("money")) {
-            circle_iv.setBackgroundResource(R.drawable.money_ic);
+        } else if (icon_str.equals("icon_7")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_7);
 
-        } else if (icon_str.equals("pet")) {
-            circle_iv.setBackgroundResource(R.drawable.pet_ic);
+        } else if (icon_str.equals("icon_8")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_8);
 
-        } else if (icon_str.equals("score")) {
-            circle_iv.setBackgroundResource(R.drawable.score_ic);
+        } else if (icon_str.equals("icon_9")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_9);
 
-        } else if (icon_str.equals("smile")) {
-            circle_iv.setBackgroundResource(R.drawable.smile_ic);
+        } else if (icon_str.equals("icon_10")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_10);
 
-        } else if (icon_str.equals("star")) {
-            circle_iv.setBackgroundResource(R.drawable.star_ic);
+        } else if (icon_str.equals("icon_11")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_11);
 
-        } else if (icon_str.equals("tea")) {
-            circle_iv.setBackgroundResource(R.drawable.tea_ic);
+        } else if (icon_str.equals("icon_12")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_12);
 
-        } else if (icon_str.equals("thumbsup")) {
-            circle_iv.setBackgroundResource(R.drawable.thumbsup_ic);
+        } else if (icon_str.equals("icon_13")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_13);
 
-        } else if (icon_str.equals("water")) {
-            circle_iv.setBackgroundResource(R.drawable.water_ic);
+        } else if (icon_str.equals("icon_14")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_14);
 
-        } else if (icon_str.equals("heart")) {
-            circle_iv.setBackgroundResource(R.drawable.heart_ic);
-
+        } else if (icon_str.equals("icon_15")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_15);
         }
-
-
+        else if (icon_str.equals("icon_16")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_16);
+        }
+        else if (icon_str.equals("icon_17")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_17);
+        }
+        else if (icon_str.equals("icon_18")) {
+            circle_iv.setBackgroundResource(R.drawable.icon_18);
+        }
     }
 }

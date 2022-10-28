@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Todo.TodoFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -27,12 +26,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="30dp" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_mid_hor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_mid_ver"
         android:layout_width="wrap_content"
@@ -41,55 +42,144 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="90dp"
+            android:background="@color/main_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/worldcup_round"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanumsquareroundotfeb"
+                        android:gravity="center"
+                        android:text="Today"
+                        android:textColor="@color/main_font"
+                        android:textSize="30dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanumsquareroundotfeb"
+                        android:gravity="center"
+                        android:text="Add Task"
+                        android:textColor="@color/white"
+                        android:textSize="15dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/main_dark"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/half_corner_white_up"
+                android:elevation="5dp"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="10dp"/>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/todo_edt"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:hint="내용을 입력하세요"
+                        android:fontFamily="@font/nanumsquareroundotfeb"
+                        android:textColor="@color/main_font"
+                        android:inputType="text" />
+
+                    <TextView
+                        android:id="@+id/todo_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/nanumsquareroundotfeb"
+                        android:textColor="@color/main_font"
+                        android:visibility="gone" />
+
+                    <Spinner
+                        android:id="@+id/plan_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical" />
+
+                    <Button
+                        android:id="@+id/add_todo_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@color/main_dark"
+                        android:fontFamily="@font/nanumsquareroundotfeb"
+                        android:text="추가하기" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left">
 
-        <EditText
-            android:id="@+id/todo_edt"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_margin="20dp"
-            android:hint="내용을 입력하세요"
-            android:inputType="text"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/todo_tv"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:visibility="gone"/>
-        <Spinner
-            android:id="@+id/plan_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/add_todo_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="추가"
-            android:background="@drawable/dark_component"
-            android:layout_marginRight="20dp" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

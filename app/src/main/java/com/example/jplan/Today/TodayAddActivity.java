@@ -34,7 +34,8 @@ public class TodayAddActivity extends AppCompatActivity {
 
     Date toTimeStamp = new Date();
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-    String timestamp_date = dateFormat.format(toTimeStamp) ;
+    String timestamp_date = dateFormat.format(toTimeStamp);
+
     SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.getDefault());
     String timestamp_time = timeFormat.format(toTimeStamp) ;
 
@@ -96,6 +97,7 @@ public class TodayAddActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<DocumentReference> task) {
                             if(task.isSuccessful()) {
                                 Intent intent = new Intent(TodayAddActivity.this, MainActivity.class);
+                                intent.putExtra("startToday", str_startT);
                                 startActivity(intent);
                                 finish();
                             }

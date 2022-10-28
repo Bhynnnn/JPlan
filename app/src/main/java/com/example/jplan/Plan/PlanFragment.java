@@ -81,25 +81,6 @@ public class PlanFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                initDataset();
-
-                mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
-                mRecyclerView.setLayoutManager(gridLayoutManager);
-                mRecyclerView.scrollToPosition(0);
-                System.out.println("fragment test oncreateview");
-                mAdapter = new PlanAdapter(mPlanData);
-                mRecyclerView.setAdapter(mAdapter);
-                mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.detach(PlanFragment.this).attach(PlanFragment.this).commit();
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
         return view;
     }
 
@@ -128,18 +109,18 @@ public class PlanFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        ((MainActivity) getActivity()).tb_title.setText("Plan");
-        System.out.println("fragment test onresume");
-        ((MainActivity) getActivity()).addBtn.setVisibility(View.VISIBLE);
-
-        ((MainActivity) getActivity()).addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), PlanAddActivity.class);
-                startActivity(intent);
-            }
-        });
+//
+//        ((MainActivity) getActivity()).tb_title.setText("Plan");
+//        System.out.println("fragment test onresume");
+//        ((MainActivity) getActivity()).addBtn.setVisibility(View.VISIBLE);
+//
+//        ((MainActivity) getActivity()).addBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getContext(), PlanAddActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
     }
 
