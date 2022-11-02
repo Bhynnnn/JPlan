@@ -79,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nanumsquareroundotfeb"
                         android:gravity="center"
-                        android:text="Today"
+                        android:text="Todo"
                         android:textColor="@color/main_font"
                         android:textSize="30dp" />
                 </LinearLayout>

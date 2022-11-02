@@ -2,10 +2,14 @@ package com.example.jplan.Todo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +20,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.jplan.Main.MainActivity;
+import com.example.jplan.ItemTouchHelperCallback;
 import com.example.jplan.Model.Constants;
 import com.example.jplan.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -29,7 +34,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.reflect.Array;
+import java.sql.Time;
 import java.util.ArrayList;
 
 public class TodoFragment extends Fragment {
@@ -49,7 +54,8 @@ public class TodoFragment extends Fragment {
     String isCheck_bool;
     ArrayAdapter<String> arrayAdapter;
     static ArrayList<String> arr;
-
+//    long num = 0;
+    ItemTouchHelper helper;
     //Todo RealTimeDB - Todo - User uid - 할 일 uid1 - 할 일 제목, 실행 여부
     //                                  - 할 일 uid2 - 할 일 제목, 실행 여부
 
@@ -74,6 +80,7 @@ public class TodoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_todo, container, false);
 
         init(view);
+
 
         System.out.println("+++Todo mTodoData " + mTodoData.size());
 
@@ -161,46 +168,57 @@ public class TodoFragment extends Fragment {
             }
         });
 
+
+
         add_todo_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                mTodoData.clear();
-                mTodoKeyData.clear();
                 System.out.println("+++Todo 추가버튼 clicked");
 
                 title_str = todo_edt.getText().toString();
 
+                Handler mHandler = new Handler();
+                mHandler.postDelayed(new Runnable() {
+                    public void run() {
 
-                if (title_str.equals("")) {
-                    if (str_temp.equals("")) {
-                        Toast.makeText(getContext(), "제목을 입력해 주세요", Toast.LENGTH_SHORT).show();
-                    } else {
-                        title_str = str_temp;
-                        //edittext 값이 빈 값이 아님
-                        Todo todo = new Todo();
-                        todo.setTitle(title_str);
-                        todo.setSelected("false");
-                        database.getReference().child("TodoList").child(auth.getCurrentUser().getUid()).push().setValue(todo);
-                        System.out.println("+++Todo push 성공 - Plan에 저장한 것 추가");
-//                        mAdapter.notifyItemInserted(mTodoData.size());
+                        if (title_str.equals("")) {
+                            if (!str_temp.equals("")) {
+                                mTodoData.clear();
+                                mTodoKeyData.clear();
+                                title_str = str_temp;
+
+                                //edittext 값이 빈 값이 아님
+                                Todo todo = new Todo();
+                                todo.setTitle(title_str);
+                                todo.setSelected("false");
+                                database.getReference().child("TodoList").child(auth.getCurrentUser().getUid()).push().setValue(todo);
+                                System.out.println("+++Todo push 성공 - Plan에 저장한 것 추가");
+                            }
+                            else{
+                                Toast.makeText(getContext(), "제목을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else {
+                            //edittext 값이 빈 값이 아님
+                            mTodoData.clear();
+                            mTodoKeyData.clear();
+                            Todo todo = new Todo();
+                            todo.setTitle(title_str);
+                            todo.setSelected("false");
+//                            todo.setNum((int) (num));
+                            database.getReference().child("TodoList").child(auth.getCurrentUser().getUid()).push().setValue(todo);
+                            System.out.println("+++Todo push 성공 - 새로 추가");
+                        }
+                        System.out.println("+++Todo mTodoData 0 " + mTodoData.size());
+                        System.out.println("+++Todo mTodoKeyData " + mTodoKeyData.size());
+
+                        todo_edt.setText("");
                     }
-                }
-                else {
-                    //edittext 값이 빈 값이 아님
-                    Todo todo = new Todo();
-                    todo.setTitle(title_str);
-                    todo.setSelected("false");
-                    database.getReference().child("TodoList").child(auth.getCurrentUser().getUid()).push().setValue(todo);
-                    System.out.println("+++Todo push 성공 - 새로 추가");
-//                    mAdapter.notifyItemInserted(mTodoData.size());
-                }
+                }, 500); // 0.5초후
                 mAdapter.notifyDataSetChanged();
-                System.out.println("+++Todo mTodoData 0 " + mTodoData.size());
-                System.out.println("+++Todo mTodoKeyData " + mTodoKeyData.size());
 
-                todo_edt.setText("");
             }
+
 
 
         });
@@ -215,6 +233,10 @@ public class TodoFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.scrollToPosition(0);
         mAdapter = new TodoAdapter(mTodoData, mTodoKeyData);
+
+        helper = new ItemTouchHelper(new ItemTouchHelperCallback(mAdapter));
+        helper.attachToRecyclerView(mRecyclerView);
+
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 

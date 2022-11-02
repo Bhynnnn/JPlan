@@ -1,6 +1,6 @@
 package com.example.jplan.Todo;
 
-import android.util.JsonToken;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,23 +8,26 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jplan.ItemTouchHelperListener;
 import com.example.jplan.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
+public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> implements ItemTouchHelperListener {
     private ArrayList<Todo> mDataset;
     private ArrayList<String> mKeyDataset;
-
+    Map<String, Integer> map = new HashMap<>();
+    List<String> keyList;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
 
@@ -45,62 +48,65 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(TodoAdapter.ViewHolder holder, int position) {
         Todo todo = mDataset.get(position);
-
-        mKeyDataset.get(0);
-
-        System.out.println("todoAdapter key data " + mKeyDataset.get(0));
-        System.out.println("todoAdapter key data " + mKeyDataset.get(1));
-        System.out.println("todoAdapter key data " + mKeyDataset.get(2));
-        System.out.println("todoAdapter key data " + mKeyDataset.get(3));
-        System.out.println("todoAdapter key data " + mKeyDataset.get(4));
-
-
-        holder.setItem(todo);
         holder.title_Todo.setText(todo.getTitle());
-//        holder.check_todo.setChecked(Boolean.parseBoolean(todo.getSelected()));
-
-        System.out.println("todo adapter title" + todo.getTitle());
-        System.out.println("todo adapter check " + todo.getSelected());
-
-        if (todo.getSelected().equals("false") ){
+        if (todo.getSelected().equals("false")) {
             holder.check_todo.setChecked(false);
-        }
-        else if(todo.getSelected().equals("true")){
+        } else if (todo.getSelected().equals("true")) {
             holder.check_todo.setChecked(true);
         }
-
         holder.check_todo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println("adapter position " + holder.getAdapterPosition());
                 System.out.println("check todo is checked? " + holder.check_todo.isChecked());
 
-                if(holder.check_todo.isChecked()){
-                    // 원래 체크되어잌ㅅ다 ( true )
-                    System.out.println("in if " + holder.check_todo.isChecked());
-
-                    holder.check_todo.setChecked(false);
-                    String str_todo_uid = mKeyDataset.get(holder.getAdapterPosition());
-                    db.getReference().child("TodoList").child(auth.getCurrentUser().getUid()).child(str_todo_uid)
-                            .child("selected").setValue("false");
-                }
-                else if (!holder.check_todo.isChecked()){
-                    System.out.println("in if " + holder.check_todo.isChecked());
-
-                    holder.check_todo.setChecked(true);
-                    String str_todo_uid = mKeyDataset.get(holder.getAdapterPosition());
-                    db.getReference().child("TodoList").child(auth.getCurrentUser().getUid()).child(str_todo_uid)
+                if (holder.check_todo.isChecked()) {
+                    db.getReference().child("TodoList").child(auth.getCurrentUser().getUid()).child(mKeyDataset.get(holder.getAdapterPosition()))
                             .child("selected").setValue("true");
                 }
-
+                if (!holder.check_todo.isChecked()) {
+                    db.getReference().child("TodoList").child(auth.getCurrentUser().getUid()).child(mKeyDataset.get(holder.getAdapterPosition()))
+                            .child("selected").setValue("false");
+                }
 
             }
         });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // itemView 클릭시 수정
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return mDataset.size();
+
+    }
+
+    @Override
+    public boolean onItemMove(int from_position, int to_position) {
+        Todo change_item = mDataset.get(from_position);
+
+        mDataset.remove(from_position);
+        mDataset.add(to_position, change_item);
+
+        notifyItemMoved(from_position, to_position);
+        return true;
+    }
+
+    @Override
+    public void onItemSwipe(int position) {
+        mDataset.remove(position);
+
+        System.out.println("remove key " + mKeyDataset.get(position));
+
+        db.getReference().child("TodoList").child(auth.getCurrentUser().getUid()).child(mKeyDataset.get(position)).removeValue();
+
+        notifyItemRemoved(position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -113,11 +119,5 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
             check_todo = (CheckBox) view.findViewById(R.id.check_todo);
         }
 
-        public void setItem(Todo item){
-            title_Todo.setText(item.getTitle());
-        }
-
     }
-
-
 }

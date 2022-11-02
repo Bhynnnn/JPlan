@@ -75,84 +75,99 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="450dp"
-            android:background="@drawable/half_corner_main_up"
-            android:layout_gravity="bottom"/>
+            android:layout_gravity="bottom"
+            android:background="@drawable/half_corner_main_up" />
+
         <LinearLayout
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
             android:background="@drawable/radius_border"
             android:elevation="5dp"
             android:orientation="vertical">
 
-            <CalendarView
-                android:id="@+id/calendarView"
-                android:layout_width="350dp"
-                android:layout_height="330dp" />
+            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                android:id="@+id/calendarview"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:mcv_selectionColor="@color/main"
+                app:mcv_arrowColor="@color/main_dark"
+                android:clickable="false"
+                android:pointerIcon="crosshair"
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical" >
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
                 <View
                     android:layout_width="100dp"
                     android:layout_height="2dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@color/main_dark" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanumsquareroundotfeb"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
+                    android:fontFamily="@font/nanumsquareroundotfeb"
                     android:text="My Goal"
                     android:textColor="@color/main_font"
                     android:textSize="20dp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="100dp"
                         android:layout_height="130dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
+
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_gravity="center_horizontal"
-                            android:background="@drawable/percent_20"/>
+                            android:background="@drawable/percent_20" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:layout_marginRight="30dp"
                             android:layout_marginLeft="30dp"
+                            android:layout_marginRight="30dp"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/nanumsquareroundotfeb"
                                 android:gravity="center"
                                 android:text="Plan"
                                 android:textColor="@color/main_font"
-                                android:fontFamily="@font/nanumsquareroundotfeb"
                                 android:textSize="20dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/nanumsquareroundotfeb"
                                 android:gravity="center"
                                 android:text="20 %"
                                 android:textColor="@color/gray"
-                                android:fontFamily="@font/nanumsquareroundotfeb"
                                 android:textSize="20dp" />
                         </LinearLayout>
 
@@ -164,85 +179,92 @@
                         android:layout_height="130dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
+
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_gravity="center_horizontal"
-                            android:background="@drawable/percent_60"/>
+                            android:background="@drawable/percent_60" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:layout_marginRight="30dp"
                             android:layout_marginLeft="30dp"
+                            android:layout_marginRight="30dp"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/nanumsquareroundotfeb"
                                 android:gravity="center"
                                 android:text="Todo"
                                 android:textColor="@color/main_font"
-                                android:fontFamily="@font/nanumsquareroundotfeb"
                                 android:textSize="20dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/nanumsquareroundotfeb"
                                 android:gravity="center"
                                 android:text="80 %"
                                 android:textColor="@color/gray"
-                                android:fontFamily="@font/nanumsquareroundotfeb"
                                 android:textSize="20dp" />
                         </LinearLayout>
 
 
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="180dp"
                     android:layout_height="130dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="10dp"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_gravity="center_horizontal"
-                        android:background="@drawable/percent_40"/>
+                        android:background="@drawable/percent_40" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:layout_marginRight="30dp"
                         android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:fontFamily="@font/nanumsquareroundotfeb"
                             android:gravity="center"
                             android:text="Diary"
                             android:textColor="@color/main_font"
-                            android:fontFamily="@font/nanumsquareroundotfeb"
                             android:textSize="20dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:fontFamily="@font/nanumsquareroundotfeb"
                             android:gravity="center"
                             android:text="40 %"
                             android:textColor="@color/gray"
-                            android:fontFamily="@font/nanumsquareroundotfeb"
                             android:textSize="20dp" />
                     </LinearLayout>
 
 
                 </LinearLayout>
 
-        </LinearLayout>
+            </LinearLayout>
 
 
         </LinearLayout>

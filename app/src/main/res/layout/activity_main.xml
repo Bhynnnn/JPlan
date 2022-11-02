@@ -49,7 +49,7 @@
             android:layout_height="match_parent"
             android:id="@+id/nav_view"
             android:layout_gravity="start"
-            android:background="@color/main"
+            android:background="@color/main_dark"
             android:fitsSystemWindows="true"
             app:itemTextColor="@color/black"
             app:itemIconTint="@color/white"

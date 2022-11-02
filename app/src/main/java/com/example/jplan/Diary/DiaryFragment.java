@@ -61,7 +61,7 @@ import java.util.Locale;
 public class DiaryFragment extends Fragment {
 
     Button diary_add_btn;
-    TextView today_tv;
+    static TextView today_tv;
     static TextView icon_tv;
     static TextView diary_content_tv;
     static ImageView diary_pic;
@@ -132,19 +132,12 @@ public class DiaryFragment extends Fragment {
 
         System.out.println("date format " + day);
 
-//
-//        Glide.with(getContext())
-//                .load(R.drawable.jplan_logo)
-//                .into(diary_pic);
-//        icon_tv.setText("작성된 일기가 없습니다😅");
-//        diary_content_tv.setText("일기를 작성해주세요");
-
-
         diary_add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), DiaryAddActivity.class);
-                startActivity(intent);            }
+                startActivity(intent);
+            }
         });
 
         return view;
@@ -227,6 +220,7 @@ public class DiaryFragment extends Fragment {
     }
 
     public static void showDiary(String date) {
+
         firebaseFirestore.collection("User")
                 .document(firebaseAuth.getCurrentUser().getUid())
                 .collection("Diary")
@@ -238,6 +232,7 @@ public class DiaryFragment extends Fragment {
                             Glide.with(context)
                                     .load(R.drawable.jplan_logo)
                                     .into(diary_pic);
+                            today_tv.setText(date);
                             icon_tv.setText("작성된 일기가 없습니다😅");
                             diary_content_tv.setText("일기를 새로 작성해주세요");
                             for (QueryDocumentSnapshot document : task.getResult()) {
@@ -246,7 +241,7 @@ public class DiaryFragment extends Fragment {
                                     System.out.println("document getdata " + document.getData());
                                     System.out.println("document getid " + document.getId());
                                     System.out.println("document getdata icon " + document.get("imgUrl").toString());
-
+                                    today_tv.setText(date);
                                     Glide.with(context)
                                             .load(document.get("imgUrl").toString())
                                             .into(diary_pic);

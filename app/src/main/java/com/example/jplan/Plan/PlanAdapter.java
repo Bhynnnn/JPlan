@@ -63,50 +63,58 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         // 횟수 첫 세팅
         holder.total_tv.setText(String.valueOf(plan.getTotal_Plan()));
         holder.count_tv.setText(String.valueOf(plan.getCount_Plan()));
-        if (plan.getIcon_Plan().equals("walk")) {
-            holder.circle_iv.setBackgroundResource(R.drawable.walk_ic);
-        } else if (plan.getIcon_Plan().equals("bus")) {
-            holder.circle_iv.setBackgroundResource(R.drawable.bus_ic);
+        if (plan.getIcon_Plan().equals("icon_1")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_1);
+        } else if (plan.getIcon_Plan().equals("icon_2")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_2);
 
-        } else if (plan.getIcon_Plan().equals("airplane")) {
-            holder.circle_iv.setBackgroundResource(R.drawable.airplane_ic);
+        } else if (plan.getIcon_Plan().equals("icon_3")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_3);
 
-        } else if (plan.getIcon_Plan().equals("android")) {
-            holder.circle_iv.setBackgroundResource(R.drawable.android_ic);
+        } else if (plan.getIcon_Plan().equals("icon_4")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_4);
 
-        } else if (plan.getIcon_Plan().equals("health")) {
-            holder.circle_iv.setBackgroundResource(R.drawable.health_ic);
+        } else if (plan.getIcon_Plan().equals("icon_5")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_5);
 
-        } else if (plan.getIcon_Plan().equals("code")) {
-            holder.circle_iv.setBackgroundResource(R.drawable.code_ic);
+        } else if (plan.getIcon_Plan().equals("icon_6")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_6);
 
-        } else if (plan.getIcon_Plan().equals("money")) {
-            holder.circle_iv.setBackgroundResource(R.drawable.money_ic);
+        } else if (plan.getIcon_Plan().equals("icon_7")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_7);
 
-        } else if (plan.getIcon_Plan().equals("pet")) {
-            holder.circle_iv.setBackgroundResource(R.drawable.pet_ic);
+        } else if (plan.getIcon_Plan().equals("icon_8")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_8);
 
-        } else if (plan.getIcon_Plan().equals("score")) {
-            holder.circle_iv.setBackgroundResource(R.drawable.score_ic);
+        } else if (plan.getIcon_Plan().equals("icon_9")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_9);
 
-        } else if (plan.getIcon_Plan().equals("smile")) {
-            holder.circle_iv.setBackgroundResource(R.drawable.smile_ic);
+        } else if (plan.getIcon_Plan().equals("icon_10")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_10);
 
-        } else if (plan.getIcon_Plan().equals("star")) {
-            holder.circle_iv.setBackgroundResource(R.drawable.star_ic);
+        } else if (plan.getIcon_Plan().equals("icon_11")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_11);
 
-        } else if (plan.getIcon_Plan().equals("tea")) {
-            holder.circle_iv.setBackgroundResource(R.drawable.tea_ic);
+        } else if (plan.getIcon_Plan().equals("icon_12")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_12);
 
-        } else if (plan.getIcon_Plan().equals("thumbsup")) {
-            holder.circle_iv.setBackgroundResource(R.drawable.thumbsup_ic);
+        } else if (plan.getIcon_Plan().equals("icon_13")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_13);
 
-        } else if (plan.getIcon_Plan().equals("water")) {
-            holder.circle_iv.setBackgroundResource(R.drawable.water_ic);
+        } else if (plan.getIcon_Plan().equals("icon_14")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_14);
 
-        } else if (plan.getIcon_Plan().equals("heart")) {
-            holder.circle_iv.setBackgroundResource(R.drawable.heart_ic);
-
+        } else if (plan.getIcon_Plan().equals("icon_15")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_15);
+        }
+        else if (plan.getIcon_Plan().equals("icon_16")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_16);
+        }
+        else if (plan.getIcon_Plan().equals("icon_17")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_17);
+        }
+        else if (plan.getIcon_Plan().equals("icon_18")) {
+            holder.circle_iv.setBackgroundResource(R.drawable.icon_18);
         }
 
         holder.itemView.setOnClickListener(new DoubleClickListener() {

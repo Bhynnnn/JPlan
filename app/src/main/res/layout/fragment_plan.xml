@@ -32,13 +32,9 @@
                 android:gravity="center_horizontal|center_vertical"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/menu"
+                <View
                     android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/ic_menu"
-                    android:backgroundTint="@color/black" />
-
+                    android:layout_height="30dp"/>
                 <TextView
                     android:id="@+id/worldcup_round"
                     android:layout_width="wrap_content"

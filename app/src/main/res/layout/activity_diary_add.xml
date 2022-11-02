@@ -48,25 +48,29 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/main"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/back_btn"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="@drawable/back_btn"
-            android:backgroundTint="@color/black"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="일기작성"
-            android:textColor="@color/black"
-            android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/worldcup_round"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/nanumsquareroundotfeb"
+                android:text="Diary"
+                android:textColor="@color/main_font"
+                android:textSize="30dp" />
+        </FrameLayout>
+
     </com.google.android.material.appbar.MaterialToolbar>
 
     <LinearLayout
@@ -92,7 +96,8 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
-            android:background="@drawable/logo" />
+            android:background="@drawable/ic_account_box"
+            android:backgroundTint="@color/main_font"/>
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -161,15 +166,16 @@
         app:layout_constraintRight_toLeftOf="@id/guideline_right">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/add_btn"
+            android:id="@+id/diary_add_btn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/light_component"
-            android:gravity="center"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/dark_component"
             android:text="일기 작성하기"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/nanumsquareroundotfeb"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
     </LinearLayout>
 
 

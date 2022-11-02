@@ -1,10 +1,18 @@
 package com.example.jplan.Todo;
 
 public class Todo {
-
-
     String title;
     String isSelected;
+
+//    public int getNum() {
+//        return num;
+//    }
+//
+//    public void setNum(int num) {
+//        this.num = num;
+//    }
+//
+//    int num;
 
     public Todo(String title, String isSelected) {
         this.title = title;
@@ -30,5 +38,5 @@ public class Todo {
     public void setSelected(String selected)
     {
         isSelected = selected;
-    }}
-
+    }
+}

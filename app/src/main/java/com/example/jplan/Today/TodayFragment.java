@@ -74,11 +74,9 @@ public class TodayFragment extends Fragment {
     String str_todayT="";
     String str_time;
     TextView date;
-    Button today_add_btn, menu_btn;
+    Button today_add_btn;
     TextView today_tv;
     Calendar calendar = new GregorianCalendar();
-    Calendar yesterday = new GregorianCalendar();
-    Calendar tomorrow = new GregorianCalendar();
 
     SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
     String chkDate = SDF.format(calendar.getTime());
@@ -92,15 +90,6 @@ public class TodayFragment extends Fragment {
 
         today_tv = view.findViewById(R.id.today_tv);
         today_add_btn = view.findViewById(R.id.today_add_btn);
-        menu_btn = view.findViewById(R.id.menu);
-
-        menu_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
 
         today_add_btn.setOnClickListener(new View.OnClickListener() {
             @Override

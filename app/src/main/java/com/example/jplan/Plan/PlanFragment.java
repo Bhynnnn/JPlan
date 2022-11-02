@@ -15,6 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.jplan.Model.Constants;
 import com.example.jplan.Main.MainActivity;
@@ -28,7 +29,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class PlanFragment extends Fragment {
     private RecyclerView mRecyclerView;
@@ -41,6 +47,12 @@ public class PlanFragment extends Fragment {
     String str_title, str_memo, str_icon;
     int  total_Plan_int, count_Plan_int;
     boolean check_Plan_bool;
+
+    TextView today_tv;
+
+    Date toTimeStamp = new Date();
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    String timestamp_date = dateFormat.format(toTimeStamp);
 
     public PlanFragment() {
         // Required empty public constructor
@@ -80,7 +92,9 @@ public class PlanFragment extends Fragment {
         mAdapter = new PlanAdapter(mPlanData);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        today_tv = view.findViewById(R.id.today_tv);
 
+        today_tv.setText(timestamp_date);
         return view;
     }
 

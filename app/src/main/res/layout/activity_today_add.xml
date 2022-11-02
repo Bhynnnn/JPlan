@@ -44,37 +44,41 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/linear_title"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="30dp"
                 android:layout_marginRight="30dp"
-                android:orientation="vertical">
+                android:background="@color/white"
+                android:inputType="text">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="내용"
-                    android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/title_today_edt"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
-                    android:paddingLeft="20dp"
-                    android:background="@drawable/light_component" />
-            </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:ems="1"
+                    android:fontFamily="@font/nanumsquareroundotfeb"
+                    android:hint="계획의 제목을 적어주세요 (ex 물 마시기)"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@color/main_font"
+                    android:textSize="15dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <LinearLayout
                 android:id="@+id/linear_start"
                 android:layout_width="match_parent"
@@ -144,9 +148,9 @@
                     android:id="@+id/memo_today_edt"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:paddingLeft="20dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/light_component" />
+                    android:background="@drawable/light_component"
+                    android:paddingLeft="20dp" />
             </LinearLayout>
 
             <LinearLayout
