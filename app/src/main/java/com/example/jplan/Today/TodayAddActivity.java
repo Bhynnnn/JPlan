@@ -39,6 +39,13 @@ public class TodayAddActivity extends AppCompatActivity {
     SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.getDefault());
     String timestamp_time = timeFormat.format(toTimeStamp) ;
 
+    SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
+    String timestamp_year = yearFormat.format(toTimeStamp);
+
+    SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
+    String timestamp_month = monthFormat.format(toTimeStamp);
+
+
     //firebase
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -92,7 +99,9 @@ public class TodayAddActivity extends AppCompatActivity {
 
                     System.out.println("timeStamp_date today " + timestamp_date);
                     firebaseFirestore.collection("User").document(auth.getCurrentUser()
-                            .getUid()).collection("Today").document(timestamp_date).collection("PlanByTime").add(today).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                            .getUid()).collection("Today")
+                            .document(timestamp_year)
+                            .collection(timestamp_month).document(timestamp_date).collection("PlanByTime").add(today).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {
                             if(task.isSuccessful()) {

@@ -86,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
         );
 
         mDrawerLayout.addDrawerListener(drawerToggle);
-//        navigationView.setNavigationItemSelectedListener(this);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigation_header = navigationView.getHeaderView(0);
 
@@ -128,10 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager.setUserInputEnabled(false);
         mViewPager.setAdapter(viewPagerAdapter);
-        mViewPager.setCurrentItem(0, true);
-//        tabLayout.setTabIconTint(ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this,
-//                R.color.main_dark)));
-
+        mViewPager.setCurrentItem(2, true);
 
         new TabLayoutMediator(tabLayout, mViewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override

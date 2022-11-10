@@ -116,12 +116,11 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
                     System.out.println("calendar adapter date " + item_date.getText());
                     System.out.println("calendar adapter day " + item_day.getText());
 
-                    String today = item_year.getText() + "-" + item_month.getText() + "-" + item_date.getText();
                     String today_year = mDataset.get(getAdapterPosition()).getYear();
                     String today_month = mDataset.get(getAdapterPosition()).getMonth();
                     String today_date = mDataset.get(getAdapterPosition()).getDate();
 
-                    today = today_year + "-" + today_month + "-" + today_date;
+                    String today = today_year + "-" + today_month + "-" + today_date;
                     System.out.println("calendar adapter today string " + today);
                     // 클릭된 item 값
                     TodayFragment.showToday(today);

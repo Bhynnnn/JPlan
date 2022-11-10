@@ -68,12 +68,14 @@ public class DiaryFragment extends Fragment {
     String str_year, str_month, str_day, str_date;
 
     Date toTimeStamp = new Date();
-
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     String timestamp_date = dateFormat.format(toTimeStamp);
 
-    SimpleDateFormat dayFormat = new SimpleDateFormat("dd", Locale.getDefault());
-    String day = dayFormat.format(toTimeStamp);
+    SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
+    String timestamp_year = yearFormat.format(toTimeStamp);
+
+    SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
+    String timestamp_month = monthFormat.format(toTimeStamp);
 
     Calendar calendar = new GregorianCalendar();
     SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
@@ -108,8 +110,6 @@ public class DiaryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_diary, container, false);
-//        yesterday_btn = view.findViewById(R.id.yesterday_btn);
-//        tomorrow_btn = view.findViewById(R.id.tomorrow_btn);
         diary_pic = view.findViewById(R.id.diary_pic);
         diary_content_tv = view.findViewById(R.id.diary_content_tv);
         today_tv = view.findViewById(R.id.today_tv);
@@ -129,8 +129,6 @@ public class DiaryFragment extends Fragment {
         today_tv.setText(timestamp_date);
 
         System.out.println("timestamp date " + timestamp_date);
-
-        System.out.println("date format " + day);
 
         diary_add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -224,6 +222,8 @@ public class DiaryFragment extends Fragment {
         firebaseFirestore.collection("User")
                 .document(firebaseAuth.getCurrentUser().getUid())
                 .collection("Diary")
+                .document(newInstance().timestamp_year)
+                .collection(newInstance().timestamp_month)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

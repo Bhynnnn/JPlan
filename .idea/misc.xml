@@ -69,15 +69,15 @@
         <entry key="app/src/main/res/layout/activity_diary_add.xml" value="0.1567657470703125" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.16445312500000003" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_plan_add.xml" value="0.15362701416015623" />
+        <entry key="app/src/main/res/layout/activity_plan_add.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_plan_show.xml" value="0.15427834647042404" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.13870544433593748" />
-        <entry key="app/src/main/res/layout/activity_today_add.xml" value="0.1755477905273438" />
+        <entry key="app/src/main/res/layout/activity_today_add.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.17835083007812502" />
-        <entry key="app/src/main/res/layout/fragment_diary.xml" value="0.20413208007812497" />
-        <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.1031761950395238" />
-        <entry key="app/src/main/res/layout/fragment_plan.xml" value="0.2574106717903496" />
-        <entry key="app/src/main/res/layout/fragment_today.xml" value="0.23495604747862325" />
+        <entry key="app/src/main/res/layout/fragment_diary.xml" value="0.3398361206054688" />
+        <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.13831939697265627" />
+        <entry key="app/src/main/res/layout/fragment_plan.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_today.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_todo.xml" value="0.21400146484375002" />
         <entry key="app/src/main/res/layout/icon_dialog.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_calendar.xml" value="0.8997055053710937" />

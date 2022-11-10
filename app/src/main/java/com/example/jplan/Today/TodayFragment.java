@@ -1,12 +1,19 @@
 package com.example.jplan.Today;
 
+import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,7 +33,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -49,6 +58,7 @@ public class TodayFragment extends Fragment {
 
     private static RecyclerView mRecyclerView;
     private static TodayAdapter mAdapter;
+
     private RecyclerView.LayoutManager mLayoutManager;
     private static ArrayList<Today> mTodayData;
     private static ArrayList<Today> mNewTodayData;
@@ -66,18 +76,26 @@ public class TodayFragment extends Fragment {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     String timestamp_date = dateFormat.format(toTimeStamp);
 
+    SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
+    String timestamp_year = yearFormat.format(toTimeStamp);
+
+    SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
+    String timestamp_month = monthFormat.format(toTimeStamp);
+
     String str_year, str_month, str_day, str_date;
     static String str_title;
     static String str_start;
     static String str_finish;
     static String str_memo;
-    String str_todayT="";
+    String str_todayT = "";
     String str_time;
     TextView date;
+    String str_startT, str_finishT;
+
     Button today_add_btn;
     TextView today_tv;
     Calendar calendar = new GregorianCalendar();
-
+    Context context;
     SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
     String chkDate = SDF.format(calendar.getTime());
     String todayDate = chkDate;
@@ -88,24 +106,16 @@ public class TodayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_today, container, false);
 
+        context = getContext();
         today_tv = view.findViewById(R.id.today_tv);
         today_add_btn = view.findViewById(R.id.today_add_btn);
 
         today_add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), TodayAddActivity.class);
-                startActivity(intent);
-
-                intent.putExtra("startToday", str_todayT);
-
-                int idx = str_todayT.indexOf(":");
-                // : 앞부분을 추출
-                // substring은 첫번째 지정한 인덱스는 포함하지 않는다.
-                String result = str_todayT.substring(0, idx);
-                System.out.println("substring result" + result);
-                int timeIdx = Integer.parseInt(result);
-                mAdapter.notifyItemChanged(timeIdx);
+                showBottomSheetDialog();
+                mAdapter.notifyDataSetChanged();
+                mAdapter_calendar.notifyDataSetChanged();
             }
         });
 
@@ -121,16 +131,106 @@ public class TodayFragment extends Fragment {
         mAdapter = new TodayAdapter(mNewTodayData);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
         mRecyclerView_calendar = (RecyclerView) view.findViewById(R.id.recyclerView_calendar);
         mLayoutManager_calendar = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
         mRecyclerView_calendar.setLayoutManager(mLayoutManager_calendar);
         mAdapter_calendar = new CalendarAdapter(mCalendarData, TodayFragment.this);
         mRecyclerView_calendar.setAdapter(mAdapter_calendar);
         mRecyclerView_calendar.setItemAnimator(new DefaultItemAnimator());
+        mAdapter_calendar.notifyDataSetChanged();
+        mAdapter.notifyDataSetChanged();
+
         showToday(todayDate);
 
         return view;
+    }
+
+    private void showBottomSheetDialog() {
+
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
+        bottomSheetDialog.setContentView(R.layout.activity_today_add);
+
+        EditText memo_today_edt = bottomSheetDialog.findViewById(R.id.memo_today_edt);
+        EditText title_today_edt = bottomSheetDialog.findViewById(R.id.title_today_edt);
+        TimePicker time_finish = bottomSheetDialog.findViewById(R.id.time_finish);
+        TimePicker time_start = bottomSheetDialog.findViewById(R.id.time_start);
+        Button today_add_btn = bottomSheetDialog.findViewById(R.id.today_add_btn);
+        time_start.setIs24HourView(true);
+        time_finish.setIs24HourView(true);
+
+        time_start.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                System.out.println("addToday start Time " + hourOfDay + ":" + minute);
+                str_startT = hourOfDay + ":" + minute;
+                System.out.println("addToday start Time " + str_startT);
+
+            }
+        });
+
+        time_finish.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                str_finishT = hourOfDay + ":" + minute;
+            }
+        });
+
+        time_start.setIs24HourView(true);
+        time_finish.setIs24HourView(true);
+
+        bottomSheetDialog.show();
+
+
+//        TimePickerDialog dialog = new TimePickerDialog(TodayFragment.this,android.R.style.Theme_Holo_Light_Dialog_NoActionBar, listener, 15, 24, false);
+//        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+//        dialog.show();
+
+
+        today_add_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                str_title = title_today_edt.getText().toString();
+                str_memo = memo_today_edt.getText().toString();
+                if (str_title.equals("")) {
+//                    Toast.makeText(TodayAddActivity.this, "내용을 입력해주세요", Toast.LENGTH_SHORT).show();
+                } else {
+                    // 추후에 추가하고자 하는 시간에 데이터 값 있다면 밑에 또 추가 or 거절
+                    System.out.println("value of Today title " + str_title);
+                    System.out.println("value of Today start " + str_startT);
+                    System.out.println("value of Today finish " + str_finishT);
+                    System.out.println("value of Today memo " + str_memo);
+                    Today today = new Today();
+                    today.setTitle_Today(str_title);
+                    today.setStart_Today(str_startT);
+                    today.setFinish_Today(str_finishT);
+                    today.setMemo_Today(str_memo);
+
+                    System.out.println("timeStamp_date today " + timestamp_date);
+                    db.collection("User").document(auth.getCurrentUser()
+                            .getUid()).collection("Today")
+                            .document(timestamp_year)
+                            .collection(timestamp_month).document(timestamp_date).collection("PlanByTime").add(today).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentReference> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(getContext(), "오늘의 일정 추가완료", Toast.LENGTH_SHORT).show();
+                                bottomSheetDialog.dismiss();
+                                mAdapter.notifyDataSetChanged();
+                                mAdapter_calendar.notifyDataSetChanged();
+                                showToday(timestamp_date);
+                            } else {
+                                Toast.makeText(getContext(), "오늘의 일정 추가실패", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+        mAdapter.notifyDataSetChanged();
+        mAdapter_calendar.notifyDataSetChanged();
+
+
+
     }
 
     @Override
@@ -220,11 +320,22 @@ public class TodayFragment extends Fragment {
         for (int i = 0; i < 24; i++) {
             mTodayData.add(i, new Today(i, "", "", "", ""));
         }
+        String[] splitText;
+
+        splitText = date.split("-");
+
+        for (int j = 0; j < splitText.length; j++) {
+            System.out.println(" text = " + splitText[j]);
+        }
+        String str_year = splitText[0];
+        String str_month = splitText[1];
+        String str_date = splitText[2];
+
         db.collection("User")
                 .document(auth.getCurrentUser().getUid())
                 .collection("Today")
-                .document(date)
-                .collection("PlanByTime")
+                .document(str_year)
+                .collection(str_month).document(date).collection("PlanByTime")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -275,7 +386,7 @@ public class TodayFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
+        mAdapter.notifyDataSetChanged();
 
 
     }

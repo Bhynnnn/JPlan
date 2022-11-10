@@ -55,7 +55,7 @@ public class DiaryAddActivity extends AppCompatActivity {
 
     ImageView diary_pic_btn;
     EditText icon_edt, diary_content_tv;
-    Button add_btn;
+    Button diary_add_btn;
 
     String icon_str, content_str;
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
@@ -65,6 +65,12 @@ public class DiaryAddActivity extends AppCompatActivity {
     Date toTimeStamp = new Date();
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     String timestamp_date = dateFormat.format(toTimeStamp);
+
+    SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
+    String timestamp_year = yearFormat.format(toTimeStamp);
+
+    SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
+    String timestamp_month = monthFormat.format(toTimeStamp);
 
     Uri imageUri;
 
@@ -76,7 +82,7 @@ public class DiaryAddActivity extends AppCompatActivity {
         diary_content_tv = findViewById(R.id.diary_content_tv);
         diary_pic_btn = findViewById(R.id.diary_pic_btn);
         icon_edt = findViewById(R.id.icon_edt);
-        add_btn = findViewById(R.id.add_btn);
+        diary_add_btn = findViewById(R.id.diary_add_btn);
 
         diary_pic_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +94,7 @@ public class DiaryAddActivity extends AppCompatActivity {
         });
 
 
-        add_btn.setOnClickListener(new View.OnClickListener() {
+        diary_add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -126,10 +132,10 @@ public class DiaryAddActivity extends AppCompatActivity {
                                 diary.setDiaryContent(diary_content_tv.getText().toString());
                                 diary.setImgUrl(downloadUri.toString());
                                 firebaseFirestore.collection("User").document(firebaseAuth.getCurrentUser().getUid())
-                                        .collection("Diary").document(timestamp_date).set(diary);
-
-                                Intent intent = new Intent(DiaryAddActivity.this, DiaryFragment.class);
-                                startActivity(intent);
+                                        .collection("Diary").document(timestamp_year).collection(timestamp_month).document(timestamp_date).set(diary);
+//
+//                                Intent intent = new Intent(DiaryAddActivity.this, DiaryFragment.class);
+//                                startActivity(intent);
                                 finish();
                                 // 다시 돌아올때 리프레시 해야함,,,,,
 

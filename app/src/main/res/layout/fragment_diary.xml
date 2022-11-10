@@ -68,13 +68,13 @@
                 android:textColor="@color/main_font"
                 android:textSize="30dp" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/diary_add_btn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="right|center"
                 android:background="@drawable/add_small"
-                android:backgroundTint="@color/black" />
+                android:backgroundTint="@color/main_dark"/>
         </FrameLayout>
 
     </com.google.android.material.appbar.MaterialToolbar>
@@ -99,10 +99,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@id/guideline_left"
         app:layout_constraintRight_toLeftOf="@id/guideline_right"
         app:layout_constraintTop_toBottomOf="@id/day_linear">
-
         <TextView
             android:id="@+id/today_tv"
             android:layout_width="wrap_content"
@@ -113,13 +113,14 @@
             android:gravity="center"
             android:text="2022 10 07"
             android:textColor="@color/main_dark"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
 
         <ImageView
             android:id="@+id/diary_pic"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"/>
     </LinearLayout>
 
